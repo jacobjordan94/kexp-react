@@ -3,11 +3,13 @@ import { GlobalContext } from "../main";
 
 function Home() {
 
-    const { globalState } = useContext(GlobalContext);
+    const { globalState: { currentSong } } = useContext(GlobalContext);
 
-    return <div>
-        { JSON.stringify(globalState.currentSong) }
-    </div>
+    return (
+        <div className="page page-home">
+            THE PAGE
+        </div>
+    );
 }
 
 export default Home;
