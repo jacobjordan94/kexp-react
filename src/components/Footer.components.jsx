@@ -17,13 +17,13 @@ export default function Footer({ currentPage, setCurrentPage }) {
     return ( currentSong &&
         <footer className=''>
             <div className="footer-wrap">
-                <div style={{'--tw-shadow-color': 'black'}} className="relative rounded-t-4xl overflow-hidden dark-alpha-7 shadow-md">
-                    <div className="z-[-1] absolute top-0 left-0 right-0 bottom-0 filter-[blur(5px)] pointer-events-none">
+                <div style={{'--tw-shadow-color': 'black'}} className="relative rounded-t-4xl overflow-hidden shadow-md">
+                    <div className="z-0 absolute top-0 left-0 right-0 bottom-0 filter-[blur(5px)] pointer-events-none">
                     { (currentSong.thumbnail_uri !== '') && 
                         <img className="size-full object-cover" src={currentSong.thumbnail_uri} />
                     }
                     </div>
-                    <div className="controls">
+                    <div className="controls z-1 relative dark-alpha-6">
                         { !(currentPage === '') && <NowPlaying currentSong={currentSong} /> }
                         <Navigation currentPage={currentPage} onNavigate={onNavigate} />
                     </div>
