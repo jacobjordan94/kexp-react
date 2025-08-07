@@ -9,9 +9,9 @@ function Recents() {
     }, [recents])
 
     return ( recents && 
-        <div className="page page-recents">
+        <div className="page page-recents flex flex-col gap-2 p-2">
         {
-            recents.map(song => <RecentCard song={song} />)
+            recents.map((song, i) => <RecentCard key={i} song={song} />)
         }
         </div>
     );
@@ -19,7 +19,7 @@ function Recents() {
 
 const RecentCard = ({ song }) => {
     return ( song && 
-        <div className="recent-card flex">
+        <div className="recent-card flex rounded-xl dark-alpha-5 p-2">
             <div className="album-art-wrapper rounded-md overflow-hidden pe-2">
                 <AlbumArt image={song.image_uri} />
             </div>

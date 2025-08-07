@@ -16,7 +16,8 @@ export default function useRecents(limit) {
 
 async function getRecents(limit) {
     const url = new URL('https://api.kexp.org/v2/plays/');
-    url.search = new URLSearchParams({fomat: 'json', limit: limit || 20}).toString();
+    url.search = new URLSearchParams({fomat: 'json', limit: limit || 20, exclude_airbreaks: true})
+        .toString();
 
     const response = await fetch(url);
     const json = await response.json();
