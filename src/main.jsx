@@ -5,6 +5,7 @@ import { Route, BrowserRouter, Routes } from 'react-router'
 import Home from './pages/Home'
 import useCurrentSong from './hooks/CurrentSong'
 import Footer from './components/Footer.components'
+import Recents from './pages/Recents'
 
 export const GlobalContext = createContext();
 
@@ -33,6 +34,7 @@ function App() {
             <section className='flex-grow'>
               <Routes>
                   <Route index element={<Home />} />
+                  <Route path="/recents" element={<Recents />} />
               </Routes>
             </section>
             <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} />
