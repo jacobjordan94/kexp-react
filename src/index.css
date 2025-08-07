@@ -69,3 +69,31 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.dark-alpha-1 {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.dark-alpha-2 {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.dark-alpha-3 {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.dark-alpha-4 {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.dark-alpha-5 {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.dark-alpha-6 {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.dark-alpha-7 {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.dark-alpha-8 {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.dark-alpha-9 {
+  background-color: rgba(0, 0, 0, 0.9);
+}
