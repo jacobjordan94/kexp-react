@@ -1,14 +1,11 @@
-import { createContext, StrictMode, useEffect, useState } from 'react'
+import { createContext, StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { Route, BrowserRouter, Routes } from 'react-router'
 import Home from './pages/Home'
-import useCurrentSong from './hooks/CurrentSong'
 import Footer from './components/Footer.components'
 import Recents from './pages/Recents'
 import AlbumArt from './components/AlbumArt'
-import useCurrentShow from './hooks/CurrentShow'
-import useRecents from './hooks/Recents'
 import useGlobals from './hooks/Globals'
 
 export const GlobalContext = createContext();
