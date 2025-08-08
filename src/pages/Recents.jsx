@@ -19,7 +19,7 @@ function Recents() {
 
 const RecentCard = ({ song }) => {
     return ( song && 
-        <div className="recent-card flex rounded-xl dark-alpha-5 p-2">
+        <div className="recent-card flex rounded-xl p-2 backdrop-blur-md">
             <div className="album-art-wrapper rounded-md overflow-hidden pe-2">
                 <AlbumArt image={song.image_uri} />
             </div>

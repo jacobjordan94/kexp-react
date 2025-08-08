@@ -17,13 +17,8 @@ export default function Footer({ currentPage, setCurrentPage }) {
     return ( currentSong &&
         <footer className=''>
             <div className="footer-wrap">
-                <div style={{'--tw-shadow-color': 'black'}} className="relative rounded-t-4xl overflow-hidden shadow-md">
-                    <div className="z-0 absolute top-0 left-0 right-0 bottom-0 filter-[blur(5px)] pointer-events-none">
-                    { (currentSong.thumbnail_uri !== '') && 
-                        <img className="size-full object-cover" src={currentSong.thumbnail_uri} />
-                    }
-                    </div>
-                    <div className="controls z-1 relative dark-alpha-6">
+                <div style={{'--tw-shadow-color': 'black'}} className="relative overflow-hidden backdrop-blur-sm">
+                    <div className="controls">
                         { !(currentPage === '') && <NowPlaying currentSong={currentSong} /> }
                         <Navigation currentPage={currentPage} onNavigate={onNavigate} />
                     </div>
