@@ -29,13 +29,17 @@ export default function Footer({ currentPage, setCurrentPage }) {
 }
 
 function Navigation({ currentPage, onNavigate }) {
-    const NavigationButton = ({ to, name, children }) => {
+    const NavigationButton = ({ to, name, DefaultIcon, ActiveIcon }) => {
         return <button 
-            className='w-full h-full rounded-none' 
+            className={`navigation-button w-full h-full rounded-none ease-in-out duration-150 transition-transform transform-[scale(${ currentPage === to ? 1.1 : 0.9 })]`} 
             onClick={() => onNavigate(to)}
         >
-            <div className="button-wrap flex flex-col items-center">
-                <div className="icon-wrap">{ children }</div>
+            <div className="navigation-button-wrap flex flex-col items-center">
+                <div className="icon-wrap">
+                {
+                    currentPage === to ? <ActiveIcon className='size-8' /> : <DefaultIcon className="size-8" />
+                }
+                </div>
                 <div className="name font-semi-bold">{ name }</div>
             </div>
         </button>;
@@ -44,19 +48,13 @@ function Navigation({ currentPage, onNavigate }) {
     return(
         <div className="navigation-buttons flex">
           <div className="button-wrap flex-1/3">
-            <NavigationButton name='Likes' to='/likes'>
-                { currentPage === '/likes' ? <HeartIcon className="size-8" /> : <HeartOutlineIcon className="size-8" /> }
-            </NavigationButton>
+            <NavigationButton name='Likes' to='/likes' DefaultIcon={HeartOutlineIcon} ActiveIcon={HeartIcon} />
           </div>
           <div className="button-wrap flex-1/3">
-            <NavigationButton name='Home' to='/' >
-                { currentPage === '/' ? <HomeIcon className="size-8" /> : <HomeOutlineIcon className="size-8" /> }
-            </NavigationButton>
+            <NavigationButton name='Home' to='/' DefaultIcon={HomeOutlineIcon} ActiveIcon={HomeIcon} />
           </div>
           <div className="button-wrap flex-1/3">
-            <NavigationButton name='Recents' to='/recents'>
-                { currentPage === '/recents' ? <QueueListIcon className="size-8" /> : <QueueListOutlineIcon className="size-8" /> }
-            </NavigationButton>
+            <NavigationButton name='Recents' to='/recents' DefaultIcon={QueueListOutlineIcon} ActiveIcon={QueueListIcon} />
           </div>
         </div>
     );
