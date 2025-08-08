@@ -10,7 +10,7 @@ export default function Footer({ currentPage, setCurrentPage }) {
   
     const navigate = useNavigate();
     function onNavigate(page) {
-        navigate('/' + page);
+        navigate(page);
         setCurrentPage(page);
     }
 
@@ -19,7 +19,7 @@ export default function Footer({ currentPage, setCurrentPage }) {
             <div className="footer-wrap">
                 <div style={{'--tw-shadow-color': 'black'}} className="relative overflow-hidden backdrop-blur-sm">
                     <div className="controls">
-                        { !(currentPage === '') && <NowPlaying currentSong={currentSong} /> }
+                        { !(currentPage === '/') && <NowPlaying currentSong={currentSong} /> }
                         <Navigation currentPage={currentPage} onNavigate={onNavigate} />
                     </div>
                 </div>
@@ -44,18 +44,18 @@ function Navigation({ currentPage, onNavigate }) {
     return(
         <div className="navigation-buttons flex">
           <div className="button-wrap flex-1/3">
-            <NavigationButton name='Likes' to='likes'>
-                { currentPage === 'likes' ? <HeartIcon className="size-8" /> : <HeartOutlineIcon className="size-8" /> }
+            <NavigationButton name='Likes' to='/likes'>
+                { currentPage === '/likes' ? <HeartIcon className="size-8" /> : <HeartOutlineIcon className="size-8" /> }
             </NavigationButton>
           </div>
           <div className="button-wrap flex-1/3">
-            <NavigationButton name='Home' to='' >
-                { currentPage === '' ? <HomeIcon className="size-8" /> : <HomeOutlineIcon className="size-8" /> }
+            <NavigationButton name='Home' to='/' >
+                { currentPage === '/' ? <HomeIcon className="size-8" /> : <HomeOutlineIcon className="size-8" /> }
             </NavigationButton>
           </div>
           <div className="button-wrap flex-1/3">
-            <NavigationButton name='Recents' to='recents'>
-                { currentPage === 'recents' ? <QueueListIcon className="size-8" /> : <QueueListOutlineIcon className="size-8" /> }
+            <NavigationButton name='Recents' to='/recents'>
+                { currentPage === '/recents' ? <QueueListIcon className="size-8" /> : <QueueListOutlineIcon className="size-8" /> }
             </NavigationButton>
           </div>
         </div>

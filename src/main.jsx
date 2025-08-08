@@ -20,25 +20,26 @@ function App() {
     currentSong: null,
   });
   const [ currentSong ] = useCurrentSong();
-  const [ currentPage, setCurrentPage ] = useState();
-
+  const [ currentPage, setCurrentPage ] = useState(
+    location.pathname
+  );
   useEffect(() => {
     setGlobalState(oldState => ({ ...oldState, currentSong }));
   }, [ currentSong ]);
-  
+
   return(
     currentSong && 
     <div className="app-root flex flex-col h-lvh w-lvw relative">
       <BrowserRouter>
-          <GlobalContext value={{ globalState, setGlobalState }}>
-            <section className='flex-grow overflow-y-scroll'>
-              <Routes>
-                  <Route index element={<Home />} />
-                  <Route path="/recents" element={<Recents />} />
-              </Routes>
-            </section>
-            <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} />
-          </GlobalContext>
+        <GlobalContext value={{ globalState, setGlobalState }}>
+          <section className='flex-grow overflow-y-scroll'>
+            <Routes>
+                <Route index element={<Home />} />
+                <Route path="/recents" element={<Recents />} />
+            </Routes>
+          </section>
+          <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        </GlobalContext>
       </BrowserRouter>
       {
         (currentSong.image_uri !== '') &&
