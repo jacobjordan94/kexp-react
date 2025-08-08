@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useContext } from "react";
 import useRecents from "../hooks/Recents";
 import AlbumArt from "../components/AlbumArt";
+import { GlobalContext } from "../main";
 
 function Recents() {
 
-    const [ recents ] = useRecents();
+    const { globalState: { recents } } = useContext(GlobalContext);
 
     return ( recents && 
         <div className="page page-recents flex flex-col gap-2 p-2">

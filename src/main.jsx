@@ -8,6 +8,7 @@ import Footer from './components/Footer.components'
 import Recents from './pages/Recents'
 import AlbumArt from './components/AlbumArt'
 import useCurrentShow from './hooks/CurrentShow'
+import useRecents from './hooks/Recents'
 
 export const GlobalContext = createContext();
 
@@ -23,12 +24,15 @@ function App() {
   });
   const [ currentShow, refreshCurrentShow ] = useCurrentShow();
   const [ currentSong ] = useCurrentSong();
+  const [ recents, setRecents ] = useRecents();
   const [ currentPage, setCurrentPage ] = useState(
     location.pathname
   );
+
   useEffect(() => {
-    if(!currentSong && !globalState)
-    if(currentSong.show !== globalState.currentSong.show) refreshCurrentShow();
+    if(!currentSong && !globalState && !recents) return;
+    if(currentSong && globalState.currentSong && currentSong.show !== globalState.currentSong.show) refreshCurrentShow();
+    if(currentSong && recents && currentSong.play_type === 'trackplay') setRecents(old => [ {...currentSong}, ...old]);
     setGlobalState(oldState => ({ ...oldState, currentSong }));
   }, [ currentSong ]);
 
@@ -36,6 +40,11 @@ function App() {
     if(!currentShow) return;
     setGlobalState(oldState => ({...oldState, currentShow}));
   }, [ currentShow ]);
+
+  useEffect(() => {
+    if(!recents) return;
+    setGlobalState(oldState => ({ ...oldState, recents }));
+  }, [ recents ]);
 
   return(
     currentSong && 
