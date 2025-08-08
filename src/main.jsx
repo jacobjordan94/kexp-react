@@ -9,6 +9,7 @@ import Recents from './pages/Recents'
 import AlbumArt from './components/AlbumArt'
 import useCurrentShow from './hooks/CurrentShow'
 import useRecents from './hooks/Recents'
+import useGlobals from './hooks/Globals'
 
 export const GlobalContext = createContext();
 
@@ -19,35 +20,13 @@ createRoot(document.getElementById('root')).render(
 )
 
 function App() {
-  const [ globalState, setGlobalState ] = useState({
-    currentSong: null,
-  });
-  const [ currentShow, refreshCurrentShow ] = useCurrentShow();
-  const [ currentSong ] = useCurrentSong();
-  const [ recents, setRecents ] = useRecents();
+  const [ globalState, setGlobalState ] = useGlobals();
   const [ currentPage, setCurrentPage ] = useState(
     location.pathname
   );
 
-  useEffect(() => {
-    if(!currentSong && !globalState && !recents) return;
-    if(currentSong && globalState.currentSong && currentSong.show !== globalState.currentSong.show) refreshCurrentShow();
-    if(currentSong && recents && currentSong.play_type === 'trackplay') setRecents(old => [ {...currentSong}, ...old]);
-    setGlobalState(oldState => ({ ...oldState, currentSong }));
-  }, [ currentSong ]);
-
-  useEffect(() => {
-    if(!currentShow) return;
-    setGlobalState(oldState => ({...oldState, currentShow}));
-  }, [ currentShow ]);
-
-  useEffect(() => {
-    if(!recents) return;
-    setGlobalState(oldState => ({ ...oldState, recents }));
-  }, [ recents ]);
-
   return(
-    currentSong && 
+    globalState.currentSong && 
     <div className="app-root flex flex-col h-lvh w-lvw relative">
       <BrowserRouter>
         <GlobalContext value={{ globalState, setGlobalState }}>
@@ -57,11 +36,11 @@ function App() {
                 <Route path="/recents" element={<Recents />} />
             </Routes>
           </section>
-          <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} currentShow={currentShow} />
+          <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} currentShow={globalState.currentShow} />
         </GlobalContext>
       </BrowserRouter>
       <div className="background-image absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[-1] blur-sm brightness-80">
-        <AlbumArt image={currentSong.image_uri}/>
+        <AlbumArt image={globalState.currentSong.image_uri}/>
       </div>
     </div>
   )
