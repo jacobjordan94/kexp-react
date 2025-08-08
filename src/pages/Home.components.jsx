@@ -17,16 +17,16 @@ export function HomeInformation({ currentSong }) {
 
 const SongInformation = ({ currentSong }) => 
     <div className="information-wrapper">
-        <div className="artist text-2xl flex flex-row">
+        <div className="artist text-2xl flex flex-row items-center">
             <div className="icon size-10 flex items-center justify-center me-2">
                 <UserIcon className="size-8" />
             </div>
-            { currentSong.artist }
+            { currentSong.artist || 'KEXP' }
         </div>
-        <div className="song text-lg flex flex-row items-center">
-            <div className="icon w-10 items-center flex justify-center me-2">
+        <div className="song text-lg flex flex-row items-center mt-0.5">
+            <div className="icon w-10 flex justify-center me-2">
                 <MusicalNoteIcon className="size-4" />
             </div>
-            { currentSong.song }
+            { currentSong.song || 'Airbreak' }
         </div>
     </div>
