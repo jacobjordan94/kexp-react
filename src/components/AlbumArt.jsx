@@ -1,6 +1,8 @@
-function AlbumArt({ image, className }) {
-    return ( image &&
+function AlbumArt({ image, className, children }) {
+    return ( image ?
         <img src={image} className={className || "w-full h-full object-cover"} />
+        :
+        children
     );
 }
 
