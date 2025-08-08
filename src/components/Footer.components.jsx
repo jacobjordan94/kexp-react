@@ -61,45 +61,45 @@ function Navigation({ currentPage, onNavigate }) {
     );
 }
 
-function NowPlaying({ currentSong }) {
-
-    return ( currentSong && 
-    <div className="now-playing flex p-4 pb-0">
-        <div className="album-art rounded-lg overflow-hidden">
-        { currentSong.thumbnail_uri && <img className='size-16' src={ currentSong.thumbnail_uri } alt="" /> }
-        </div>
-        <div className="info flex flex-col ps-4">
-            <div className='artist-name text-lg'>
-                { currentSong.artist }
+function PictureWithInfo({ image, title, subtitle, children }) {
+    return (
+        <div className="picture-with-info flex">
+            <div className="image size-12 rounded-md overflow-hidden">
+                <AlbumArt image={image} />
             </div>
-            <div className='track-name flex-auto'>
-                { currentSong.song }
+            <div className="title-information flex-grow ps-4 font-semibold">
+                <div className="title">
+                    { title }
+                </div>
+                <div className="subtitle text-xs">
+                    { subtitle }
+                </div>
             </div>
+            { children }
         </div>
-    </div>
     );
 }
 
+function NowPlaying({ currentSong }) {
+    return ( currentSong &&
+        <PictureWithInfo
+            image={currentSong.thumbnail_uri}
+            title={currentSong.artist || 'KEXP'}
+            subtitle={currentSong.song || 'Airbreak'}
+        />
+    )
+}
 
 function CurrentShowMini({ currentShow }) {
-    useEffect(() => { console.log(currentShow) }, [ currentShow ])
-    return (
-        currentShow && 
-        <div className="current-show-mini flex">
-            <div className="show-image size-12 rounded-md overflow-hidden">
-                <AlbumArt image={currentShow.program_image_uri} />
-            </div>
-            <div className="show-information flex-grow ps-4 font-semibold">
-                <div className="show-name">
-                    { currentShow.program_name }
-                </div>
-                <div className="host-names text-xs">
-                    { currentShow.length === 1 ? currentShow.host_names[0] : currentShow.host_names.join(', ') }
-                </div>
-            </div>
+    return ( currentShow &&
+        <PictureWithInfo 
+            image={currentShow.program_image_uri} 
+            title={currentShow.program_name}
+            subtitle={ currentShow.host_names.join(', ') }
+        >
             <div className="show-host-image size-12 overflow-hidden rounded-full">
                 <AlbumArt image={ currentShow.image_uri } />
             </div>
-        </div>
+        </PictureWithInfo>
     )
-};
+}
