@@ -11,7 +11,7 @@ export default function useCurrentSong(interval = (30 * 1000)) {
 
     useEffect(() => {
         if(!response) return;
-        setCurrentSong(response.results[0]);
+        if(!currentSong || response.results[0].id !== currentSong.id) setCurrentSong(response.results[0]);
     }, [response]);
 
     return [ currentSong ];

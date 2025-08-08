@@ -3,23 +3,30 @@ import useCurrentSong from "./CurrentSong";
 import useRecents from "./Recents";
 
 function useStartup() {
-    const [ startup, setStartup ] = useState();
-    const [ currentSong ] = useCurrentSong();
-    const [ recents ] = useRecents();
+    const [ startup, _setStartup ] = useState();
+    let currentSong;
+    const [ recents, setRecents ] = useRecents();
 
     const hasStartedUp = false;
-    // function startup() {
+    useEffect(() => {
+        if(!recents || hasStartedUp) return;
+        currentSong = useCurrentSong()[0];
+        hasStartedUp = true;
+    }, [ recents ]);
 
-    //     hasStartedUp = true;
-    // }
+    useEffect(() => {
+        if(!currentSong) return;
+        setRecents(prev => {
+            if(!prev || prev[0].id == currentSong.id) return;
+            if(currentSong.play_type === 'airbreak') return;
+            setRecents([{...currentSong}, ...prev]);
+            setStartup();
+        });
+    }, [ currentSong ])
 
-    useEffect((test) => {
-        // if(!currentSong && !recents) return;
-        // if(currentSong && recents && !hasStartedUp) startup();
-        // else {
-        //     // 
-        // }
-    }, [ currentSong, recents ])
+    function setStartup() {
+        _setStartup({ currentSong, recents });
+    }
 
     return [ startup ];
 }

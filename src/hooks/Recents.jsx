@@ -13,7 +13,7 @@ function useRecents(limit = 30) {
         setRecents(response.results);
     }, [ response ]);
 
-    return [ recents ];
+    return [ recents, setRecents ];
 }
 
 export default useRecents;
