@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useCurrentShow from "./CurrentShow";
 import useCurrentSong from "./CurrentSong";
 import useRecents from "./Recents";
+import useLikedSongs from "./LikedSongs";
 
 function useGlobals() {
     const [ globalState, _setGlobalState ] = useState({
@@ -11,6 +12,7 @@ function useGlobals() {
     const [ currentShow, refreshCurrentShow ] = useCurrentShow();
     const [ currentSong ] = useCurrentSong();
     const [ recents, setRecents ] = useRecents();
+    const [ likedSongs, likedSongsDispatch ] = useLikedSongs();
 
     function setGlobalState(partialState) {
         _setGlobalState(oldState => ({ ...oldState, ...partialState }));
@@ -32,6 +34,11 @@ function useGlobals() {
         if(!recents) return;
         setGlobalState({ recents });
     }, [ recents ]);
+
+    useEffect(() => {
+        if(!likedSongs) return;
+        setGlobalState({ likedSongs: { songs: likedSongs, dispatch: likedSongsDispatch }});
+    }, [ likedSongs ]);
 
     return [ globalState, setGlobalState ];
 }
