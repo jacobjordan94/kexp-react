@@ -48,7 +48,7 @@ function App() {
                 <Route path="/recents" element={<Recents />} />
             </Routes>
           </section>
-          <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} />
+          <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} currentShow={currentShow} />
         </GlobalContext>
       </BrowserRouter>
       <div className="background-image absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[-1] blur-sm brightness-80">

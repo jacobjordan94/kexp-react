@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { GlobalContext } from "../main";
 import { HeartIcon, HomeIcon, QueueListIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as HeartOutlineIcon, HomeIcon as HomeOutlineIcon, QueueListIcon as QueueListOutlineIcon } from "@heroicons/react/24/outline";
+import AlbumArt from "./AlbumArt";
 
-export default function Footer({ currentPage, setCurrentPage }) {
+export default function Footer({ currentPage, setCurrentPage, currentShow }) {
 
     const { globalState: { currentSong } } = useContext(GlobalContext);
   
@@ -19,7 +20,7 @@ export default function Footer({ currentPage, setCurrentPage }) {
             <div className="footer-wrap">
                 <div style={{'--tw-shadow-color': 'black'}} className="relative overflow-hidden">
                     <div className="controls">
-                        { !(currentPage === '/') && <NowPlaying currentSong={currentSong} /> }
+                        { (currentPage === '/') ? <CurrentShowMini currentShow={currentShow} /> : <NowPlaying currentSong={currentSong} /> }
                         <Navigation currentPage={currentPage} onNavigate={onNavigate} />
                     </div>
                 </div>
@@ -78,3 +79,27 @@ function NowPlaying({ currentSong }) {
     </div>
     );
 }
+
+
+function CurrentShowMini({ currentShow }) {
+    useEffect(() => { console.log(currentShow) }, [ currentShow ])
+    return (
+        currentShow && 
+        <div className="current-show-mini flex px-4">
+            <div className="show-image size-12 rounded-md overflow-hidden">
+                <AlbumArt image={currentShow.program_image_uri} />
+            </div>
+            <div className="show-information flex-grow ps-4 font-semibold">
+                <div className="show-name">
+                    { currentShow.program_name }
+                </div>
+                <div className="host-names text-xs">
+                    { currentShow.length === 1 ? currentShow.host_names[0] : currentShow.host_names.join(', ') }
+                </div>
+            </div>
+            <div className="show-host-image size-12 overflow-hidden rounded-full">
+                <AlbumArt image={ currentShow.image_uri } />
+            </div>
+        </div>
+    )
+};
