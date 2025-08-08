@@ -18,7 +18,7 @@ export default function Footer({ currentPage, setCurrentPage, currentShow }) {
     return ( currentSong &&
         <footer className=''>
             <div className="footer-wrap">
-                <div style={{'--tw-shadow-color': 'black'}} className="relative overflow-hidden">
+                <div style={{'--tw-shadow-color': 'black'}} className="relative overflow-hidden backdrop-blur-2xl px-4 pt-4">
                     <div className="controls">
                         { (currentPage === '/') ? <CurrentShowMini currentShow={currentShow} /> : <NowPlaying currentSong={currentSong} /> }
                         <Navigation currentPage={currentPage} onNavigate={onNavigate} />
@@ -85,7 +85,7 @@ function CurrentShowMini({ currentShow }) {
     useEffect(() => { console.log(currentShow) }, [ currentShow ])
     return (
         currentShow && 
-        <div className="current-show-mini flex px-4">
+        <div className="current-show-mini flex">
             <div className="show-image size-12 rounded-md overflow-hidden">
                 <AlbumArt image={currentShow.program_image_uri} />
             </div>
