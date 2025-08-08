@@ -1,25 +1,19 @@
 import { useEffect, useState } from "react";
+import useFetch from "./Fetch";
 
-export default function useRecents(limit) {
-    const [ recents, _setRecents ] = useState();
-    async function setRecents() {
-        const recents = await getRecents(limit);
-        _setRecents(recents);
-    }
+function useRecents(limit = 30) {
+
+    const params = {fomat: 'json', limit: limit, exclude_airbreaks: true};
+    const url = 'https://api.kexp.org/v2/plays/';
+    const [ response ] = useFetch(url, params);
+    const [ recents, setRecents ] = useState();
 
     useEffect(() => {
-        setRecents();
-    }, [])
+        if(!response) return;
+        setRecents(response.results);
+    }, [ response ]);
 
     return [ recents ];
 }
 
-async function getRecents(limit) {
-    const url = new URL('https://api.kexp.org/v2/plays/');
-    url.search = new URLSearchParams({fomat: 'json', limit: limit || 20, exclude_airbreaks: true})
-        .toString();
-
-    const response = await fetch(url);
-    const json = await response.json();
-    return json.results;
-}
+export default useRecents;

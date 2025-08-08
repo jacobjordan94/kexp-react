@@ -1,30 +1,19 @@
 import { useEffect, useState } from "react";
+import useFetch from "./Fetch";
 
-export default function useCurrentSong() {
-    const [ currentSong, _setCurrentSong ] = useState();
-
-    async function setCurrentSong() {
-        const song = await getCurrentSong();
-        if(!currentSong || song.id !== currentSong.id) {
-            _setCurrentSong(song);
-        }
-    }
+export default function useCurrentSong(interval = (30 * 1000)) {
+    const params = {
+        fomat: 'json', limit: '1', ordering: '-airdate', 
+        playlsit_location: '3', airdate_before: new Date().toISOString(),
+    };
+    const url = 'https://api.kexp.org/v2/plays/';
+    const [ response ] = useFetch(url, params, { autoRefresh: true, interval: interval });
+    const [ currentSong, setCurrentSong ] = useState();
 
     useEffect(() => {
-        setCurrentSong();
-        setInterval(setCurrentSong, 1000 * 20);
-    }, [])
+        if(!response) return;
+        setCurrentSong(response.results[0]);
+    }, [response]);
 
     return [ currentSong ];
-}
-
-async function getCurrentSong() {
-    const url = new URL('https://api.kexp.org/v2/plays/');
-    url.search = new URLSearchParams({
-        fomat: 'json', limit: '1', ordering: '-airdate', playlsit_location: '3', airdate_before: new Date().toISOString(),
-    }).toString();
-
-    const response = await fetch(url);
-    const json = await response.json();
-    return json.results[0];
 }
