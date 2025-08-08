@@ -7,6 +7,7 @@ import useCurrentSong from './hooks/CurrentSong'
 import Footer from './components/Footer.components'
 import Recents from './pages/Recents'
 import AlbumArt from './components/AlbumArt'
+import useCurrentShow from './hooks/CurrentShow'
 
 export const GlobalContext = createContext();
 
@@ -20,13 +21,21 @@ function App() {
   const [ globalState, setGlobalState ] = useState({
     currentSong: null,
   });
+  const [ currentShow, refreshCurrentShow ] = useCurrentShow();
   const [ currentSong ] = useCurrentSong();
   const [ currentPage, setCurrentPage ] = useState(
     location.pathname
   );
   useEffect(() => {
+    if(!currentSong && !globalState)
+    if(currentSong.show !== globalState.currentSong.show) refreshCurrentShow();
     setGlobalState(oldState => ({ ...oldState, currentSong }));
   }, [ currentSong ]);
+
+  useEffect(() => {
+    if(!currentShow) return;
+    setGlobalState(oldState => ({...oldState, currentShow}));
+  }, [ currentShow ]);
 
   return(
     currentSong && 
@@ -42,11 +51,9 @@ function App() {
           <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} />
         </GlobalContext>
       </BrowserRouter>
-      {
       <div className="background-image absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[-1] blur-sm brightness-80">
         <AlbumArt image={currentSong.image_uri}/>
       </div>
-      }
     </div>
   )
 }
