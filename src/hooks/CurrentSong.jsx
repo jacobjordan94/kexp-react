@@ -5,7 +5,9 @@ export default function useCurrentSong() {
 
     async function setCurrentSong() {
         const song = await getCurrentSong();
-        _setCurrentSong(song);
+        if(!currentSong || song.id !== currentSong.id) {
+            _setCurrentSong(song);
+        }
     }
 
     useEffect(() => {
