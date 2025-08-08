@@ -3,8 +3,7 @@ import useFetch from "./Fetch";
 
 export default function useCurrentSong(interval = (30 * 1000)) {
     const params = {
-        fomat: 'json', limit: '1', ordering: '-airdate', 
-        playlsit_location: '3', airdate_before: new Date().toISOString(),
+        fomat: 'json', limit: '1', ordering: '-airdate', playlsit_location: '3',
     };
     const url = 'https://api.kexp.org/v2/plays/';
     const [ response ] = useFetch(url, params, { autoRefresh: true, interval: interval });
