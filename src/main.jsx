@@ -43,7 +43,7 @@ function App() {
         </GlobalContext>
       </BrowserRouter>
       {
-      <div className="background-image absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[-1] blur-sm">
+      <div className="background-image absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[-1] blur-sm brightness-80">
         <AlbumArt image={currentSong.image_uri}/>
       </div>
       }

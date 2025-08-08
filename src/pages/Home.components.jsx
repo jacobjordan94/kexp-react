@@ -4,7 +4,7 @@ import AlbumArt from "../components/AlbumArt";
 export function HomeInformation({ currentSong }) {
 
     return ( currentSong &&
-        <div style={{ '--tw-text-shadow-color': 'gray' }} className="home-information-wrapper inline-flex flex-col w-10/12 text-shadow-sm rounded-2xl backdrop-blur-2xl p-4 gap-4">
+        <div className="home-information-wrapper inline-flex flex-col w-10/12 rounded-2xl backdrop-blur-2xl p-4 gap-4">
             <div className="album-art-wrapper overflow-hidden">
                 <div className="picture-wrap rounded-2xl overflow-hidden">
                     <AlbumArt className="w-full" image={currentSong.image_uri}></AlbumArt>

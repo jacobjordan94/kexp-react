@@ -17,7 +17,7 @@ export default function Footer({ currentPage, setCurrentPage }) {
     return ( currentSong &&
         <footer className=''>
             <div className="footer-wrap">
-                <div style={{'--tw-shadow-color': 'black'}} className="relative overflow-hidden backdrop-blur-sm">
+                <div style={{'--tw-shadow-color': 'black'}} className="relative overflow-hidden">
                     <div className="controls">
                         { !(currentPage === '/') && <NowPlaying currentSong={currentSong} /> }
                         <Navigation currentPage={currentPage} onNavigate={onNavigate} />
