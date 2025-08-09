@@ -1,14 +1,14 @@
 import { useContext } from "react";
-import useRecents from "../hooks/Recents";
-import AlbumArt from "../components/AlbumArt";
 import { GlobalContext } from "../main";
+import PictureWithInfo from "../components/PictureWithInfo";
+import AlbumArt from "../components/AlbumArt";
 
 function Recents() {
 
     const { globalState: { recents } } = useContext(GlobalContext);
 
     return ( recents && 
-        <div className="page page-recents flex flex-col gap-2 p-2">
+        <div className="page page-recents flex flex-col gap-3 p-2">
         {
             recents.map((song, i) => <RecentCard key={i} song={song} />)
         }
@@ -16,20 +16,13 @@ function Recents() {
     );
 }
 
-const RecentCard = ({ song }) => {
-    return ( song && 
-        <div className="recent-card flex rounded-xl p-2 backdrop-blur-md">
-            <div className="album-art-wrapper rounded-md overflow-hidden pe-2">
-                <div className="size-16">
-                    <AlbumArt image={song.image_uri} />
-                </div>
-            </div>
-            <div className="info">
-                <div className="artist-name text-lg">{ song.artist }</div>
-                <div className="song-name"  >{ song.song }</div>
-            </div>
-        </div>
-    );
-};
+const RecentCard = ({ song }) =>
+    <div className="recent-card backdrop-blur-2xl rounded-2xl p-2">
+        <PictureWithInfo
+            image={song.thumbnail_uri}
+            title={song.artist}
+            subtitle={song.song}
+        ></PictureWithInfo>
+    </div>
 
 export default Recents;
