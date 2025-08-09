@@ -47,7 +47,7 @@ const SongInformation = ({ currentSong }) =>
 const HomeButton = ({ className, onClick, children, disabled = false }) => 
     <div className="home-button-wrap">
         <div className="rounded-full overflow-hidden backdrop-blur-2xl inline-flex transparent-border-dark border-2">
-            <button disabled={disabled} className={'home-button reset-padding ' + className} 
+            <button disabled={disabled} className={'home-button reset-padding disabled:opacity-75 disabled:blur-2 ' + className} 
                     onClick={onClick}
             >
                 <div className="p-2">
