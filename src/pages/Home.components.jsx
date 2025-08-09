@@ -18,7 +18,7 @@ export function HomeInformation({ currentSong }) {
 
     return ( currentSong &&
         <div className="home-information-wrapper inline-flex flex-col rounded-2xl backdrop-blur-2xl p-4 gap-4 border-4 transparent-border-dark">
-            <div className="album-art-wrapper overflow-hidden">
+            <div className="album-art-wrapper rounded-2xl border-4 transparent-border-light">
                 <div className="picture-wrap rounded-2xl overflow-hidden">
                     <AlbumArt className="w-full" image={currentSong.image_uri}></AlbumArt>
                 </div>
@@ -29,12 +29,14 @@ export function HomeInformation({ currentSong }) {
 }
 
 const SongInformation = ({ currentSong }) => 
-    <div className="information-wrapper">
+    <div className="information-wrapper whitespace-nowrap">
         <div className="artist text-2xl flex flex-row items-center">
             <div className="icon size-10 flex items-center justify-center me-2">
                 <UserIcon className="size-8" />
             </div>
-            { currentSong.artist || 'KEXP' }
+            <div className="overflow-hidden">
+                { currentSong.artist || 'KEXP' }
+            </div>
         </div>
         <div className="song text-lg flex flex-row items-center mt-0.5">
             <div className="icon w-10 flex justify-center me-2">
