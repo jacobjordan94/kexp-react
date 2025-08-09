@@ -7,6 +7,7 @@ import Footer from './components/Footer.components'
 import Recents from './pages/Recents'
 import AlbumArt from './components/AlbumArt'
 import useGlobals from './hooks/Globals'
+import Likes from './pages/Likes'
 
 export const GlobalContext = createContext();
 
@@ -31,6 +32,7 @@ function App() {
             <Routes>
                 <Route index element={<Home />} />
                 <Route path="/recents" element={<Recents />} />
+                <Route path="/likes"   element={<Likes />} />
             </Routes>
           </section>
           <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} currentShow={globalState.currentShow} />
