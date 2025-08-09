@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { GlobalContext } from "../main";
-import { HomeInformation } from "./Home.components";
+import { HomeButtons, HomeInformation } from "./Home.components";
 
 function Home() {
 
@@ -8,8 +8,9 @@ function Home() {
 
     return (
         <div className="page page-home w-full h-full flex flex-col">
-            <div className="home-information-wrapper flex-grow items-center justify-center flex">
+            <div className="home-information-wrapper flex-grow items-center justify-center flex flex-col">
                 <HomeInformation currentSong={currentSong} />
+                <HomeButtons currentSong={currentSong} />
             </div>
         </div>
     );

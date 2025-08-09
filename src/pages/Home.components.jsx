@@ -1,5 +1,18 @@
-import { MusicalNoteIcon, UserIcon } from "@heroicons/react/16/solid";
+import { 
+    ChatBubbleBottomCenterTextIcon, 
+    MusicalNoteIcon, 
+    UserIcon,
+    HeartIcon,
+    PlayIcon,
+    PauseIcon,
+} from "@heroicons/react/24/solid";
+import { 
+    ChatBubbleBottomCenterTextIcon as ChatBubbleBottomCenterTextOutlineIcon,
+    HeartIcon as HeartOutlineIcon,
+} from '@heroicons/react/24/outline';
 import AlbumArt from "../components/AlbumArt";
+import { useContext, useState } from "react";
+import { GlobalContext } from "../main";
 
 export function HomeInformation({ currentSong }) {
 
@@ -30,3 +43,74 @@ const SongInformation = ({ currentSong }) =>
             { currentSong.song || 'Airbreak' }
         </div>
     </div>
+
+const HomeButton = ({ className, onClick, children }) => 
+    <div className="home-button-wrap">
+        <div className="rounded-full overflow-hidden backdrop-blur-2xl inline-flex">
+            <button className={'home-button reset-padding ' + className} 
+                    onClick={onClick}
+            >
+                <div className="p-2">
+                    { children }
+                </div>
+            </button>
+        </div>
+    </div>
+
+function InformationButton({ currentSong })  {
+    function onClick() {
+        console.log(currentSong.comment);
+    }
+    return ( currentSong &&
+        <HomeButton className={'information size-12'} onClick={onClick}>
+        {
+            currentSong.comment && currentSong.comment !== '' ?     
+            <ChatBubbleBottomCenterTextIcon /> :
+            <ChatBubbleBottomCenterTextOutlineIcon />
+        }
+        </HomeButton>
+    );
+}
+
+function PlayPauseButton({ onClick }) {
+    const [ audioIsPlaying, setAudioIsPlaying ] = useState(false);
+    return (
+        <HomeButton className={'play-pause size-16'} onClick={() => setAudioIsPlaying(!audioIsPlaying)}>
+        {
+            audioIsPlaying ? <PauseIcon /> : <PlayIcon />
+        }
+        </HomeButton>
+    );
+}
+
+function LikeButton({ currentSong }) {
+    const { globalState: { likedSongs: { songs, dispatch } } } = useContext(GlobalContext);
+    function onClick() {
+        if(songs.indexOf(song => song.id === id) > -1) {
+            // song is already liked, dislike song
+            dispatch({ action: 'remove', id: currentSong.id })
+        } else {
+            // like song
+            dispatch({ action: 'add', song: {...currentSong} });
+        }
+    }
+
+    return ( currentSong && songs &&
+        <HomeButton className={'like size-12'} onClick={onClick}>
+        {
+            songs.indexOf(song => song.id === currentSong.id) > -1 ?
+            <HeartIcon /> : <HeartOutlineIcon />
+        }
+        </HomeButton>
+    );
+}
+
+export function HomeButtons({ currentSong }) {
+    return (
+        <div className="home-buttons-wrapper flex flex-row">
+            <InformationButton currentSong={currentSong} />
+            <PlayPauseButton />
+            <LikeButton currentSong={currentSong} />
+        </div>
+    );
+}

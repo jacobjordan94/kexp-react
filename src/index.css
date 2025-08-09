@@ -97,3 +97,7 @@ button:focus-visible {
 .dark-alpha-9 {
   background-color: rgba(0, 0, 0, 0.9);
 }
+
+.reset-padding {
+  padding: 0;
+}
