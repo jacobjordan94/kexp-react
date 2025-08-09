@@ -4,6 +4,7 @@ import { GlobalContext } from "../main";
 import { HeartIcon, HomeIcon, QueueListIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as HeartOutlineIcon, HomeIcon as HomeOutlineIcon, QueueListIcon as QueueListOutlineIcon } from "@heroicons/react/24/outline";
 import AlbumArt from "./AlbumArt";
+import PictureWithInfo from "./PictureWithInfo";
 
 export default function Footer({ currentPage, setCurrentPage, currentShow }) {
 
@@ -57,25 +58,6 @@ function Navigation({ currentPage, onNavigate }) {
           <div className="button-wrap flex-1/3">
             <NavigationButton name='Recents' to='/recents' DefaultIcon={QueueListOutlineIcon} ActiveIcon={QueueListIcon} />
           </div>
-        </div>
-    );
-}
-
-function PictureWithInfo({ image, title, subtitle, children }) {
-    return (
-        <div className="picture-with-info flex">
-            <div className="image size-12 rounded-md overflow-hidden">
-                <AlbumArt image={image} />
-            </div>
-            <div className="title-information flex-grow ps-4 font-semibold">
-                <div className="title">
-                    { title }
-                </div>
-                <div className="subtitle text-xs">
-                    { subtitle }
-                </div>
-            </div>
-            { children }
         </div>
     );
 }

@@ -6,6 +6,7 @@ function useLikedSongs() {
             const local = [ ...state ];
             switch(action.type) {
                 case 'add': {
+                    if(action.song.play_type !== 'trackplay') return;
                     if(local.findIndex(song => song.id == action.song.id) > -1) return local;
                     local.unshift(action.song);
                     updateStorage(local);
