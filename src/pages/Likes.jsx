@@ -16,7 +16,7 @@ function Likes() {
 }
 
 const LikesCard = ({ song }) => 
-    <div className="recent-card backdrop-blur-2xl rounded-2xl p-2">
+    <div className="recent-card backdrop-blur-2xl rounded-lg p-2 transparent-border-dark border-4">
         <PictureWithInfo
             image={song.thumbnail_uri}
             title={song.artist}

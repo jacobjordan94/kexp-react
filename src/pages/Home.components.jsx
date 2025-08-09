@@ -17,7 +17,7 @@ import { GlobalContext } from "../main";
 export function HomeInformation({ currentSong }) {
 
     return ( currentSong &&
-        <div className="home-information-wrapper inline-flex flex-col rounded-2xl backdrop-blur-2xl p-4 gap-4">
+        <div className="home-information-wrapper inline-flex flex-col rounded-2xl backdrop-blur-2xl p-4 gap-4 border-4 transparent-border-dark">
             <div className="album-art-wrapper overflow-hidden">
                 <div className="picture-wrap rounded-2xl overflow-hidden">
                     <AlbumArt className="w-full" image={currentSong.image_uri}></AlbumArt>
@@ -46,7 +46,7 @@ const SongInformation = ({ currentSong }) =>
 
 const HomeButton = ({ className, onClick, children, disabled = false }) => 
     <div className="home-button-wrap">
-        <div className="rounded-full overflow-hidden backdrop-blur-2xl inline-flex">
+        <div className="rounded-full overflow-hidden backdrop-blur-2xl inline-flex transparent-border-dark border-2">
             <button disabled={disabled} className={'home-button reset-padding ' + className} 
                     onClick={onClick}
             >
