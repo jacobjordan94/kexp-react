@@ -21,7 +21,11 @@ export default function Footer({ currentPage, setCurrentPage, currentShow }) {
             <div className="footer-wrap">
                 <div style={{'--tw-shadow-color': 'black'}} className="relative overflow-hidden backdrop-blur-2xl px-4 pt-4">
                     <div className="controls">
-                        { (currentPage === '/') ? <CurrentShowMini currentShow={currentShow} /> : <NowPlaying currentSong={currentSong} /> }
+                        { (currentPage === '/') ? 
+                            <div className="sm:hidden">
+                                <CurrentShowMini currentShow={currentShow} /> 
+                            </div> :
+                            <NowPlaying currentSong={currentSong} /> }
                         <Navigation currentPage={currentPage} onNavigate={onNavigate} />
                     </div>
                 </div>
