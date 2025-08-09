@@ -44,10 +44,10 @@ const SongInformation = ({ currentSong }) =>
         </div>
     </div>
 
-const HomeButton = ({ className, onClick, children }) => 
+const HomeButton = ({ className, onClick, children, disabled = false }) => 
     <div className="home-button-wrap">
         <div className="rounded-full overflow-hidden backdrop-blur-2xl inline-flex">
-            <button className={'home-button reset-padding ' + className} 
+            <button disabled={disabled} className={'home-button reset-padding ' + className} 
                     onClick={onClick}
             >
                 <div className="p-2">
@@ -62,7 +62,11 @@ function InformationButton({ currentSong })  {
         console.log(currentSong.comment);
     }
     return ( currentSong &&
-        <HomeButton className={'information size-12'} onClick={onClick}>
+        <HomeButton 
+            className={'information size-12'} 
+            onClick={onClick}
+            disabled={ !currentSong.comment || currentSong.comment === '' || currentSong.play_type === 'airbreak' }
+        >
         {
             currentSong.comment && currentSong.comment !== '' ?     
             <ChatBubbleBottomCenterTextIcon /> :
@@ -104,7 +108,11 @@ function LikeButton({ currentSong }) {
     }, [ songs, currentSong ]);
 
     return ( currentSong && songs &&
-        <HomeButton className={'like size-12'} onClick={toggleLike}>
+        <HomeButton 
+            className={'like size-12'} 
+            onClick={toggleLike}
+            disabled={ currentSong.play_type !== 'trackplay' }
+        >
         {
             liked ?
             <HeartIcon /> : <HeartOutlineIcon />
