@@ -8,9 +8,11 @@ function Home() {
 
     return (
         <div className="page page-home w-full h-full flex flex-col">
-            <div className="home-information-wrapper flex-grow items-center justify-center flex flex-col">
-                <HomeInformation currentSong={currentSong} />
-                <HomeButtons currentSong={currentSong} />
+            <div className="home-information-wrapper flex-grow flex items-center justify-center">
+                <div className="w-10/12 inline-flex flex-col gap-6">
+                    <HomeInformation currentSong={currentSong} />
+                    <HomeButtons currentSong={currentSong} />
+                </div>
             </div>
         </div>
     );

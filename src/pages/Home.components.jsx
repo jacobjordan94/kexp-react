@@ -17,7 +17,7 @@ import { GlobalContext } from "../main";
 export function HomeInformation({ currentSong }) {
 
     return ( currentSong &&
-        <div className="home-information-wrapper inline-flex flex-col w-10/12 rounded-2xl backdrop-blur-2xl p-4 gap-4">
+        <div className="home-information-wrapper inline-flex flex-col rounded-2xl backdrop-blur-2xl p-4 gap-4">
             <div className="album-art-wrapper overflow-hidden">
                 <div className="picture-wrap rounded-2xl overflow-hidden">
                     <AlbumArt className="w-full" image={currentSong.image_uri}></AlbumArt>
@@ -107,9 +107,11 @@ function LikeButton({ currentSong }) {
 
 export function HomeButtons({ currentSong }) {
     return (
-        <div className="home-buttons-wrapper flex flex-row">
+        <div className="home-buttons-wrapper flex flex-row justify-evenly">
             <InformationButton currentSong={currentSong} />
-            <PlayPauseButton />
+            <div className="mt-4">
+                <PlayPauseButton />
+            </div>
             <LikeButton currentSong={currentSong} />
         </div>
     );
