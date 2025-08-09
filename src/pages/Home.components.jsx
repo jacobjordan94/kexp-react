@@ -11,7 +11,7 @@ import {
     HeartIcon as HeartOutlineIcon,
 } from '@heroicons/react/24/outline';
 import AlbumArt from "../components/AlbumArt";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../main";
 
 export function HomeInformation({ currentSong }) {
@@ -85,20 +85,28 @@ function PlayPauseButton({ onClick }) {
 
 function LikeButton({ currentSong }) {
     const { globalState: { likedSongs: { songs, dispatch } } } = useContext(GlobalContext);
-    function onClick() {
-        if(songs.indexOf(song => song.id === id) > -1) {
-            // song is already liked, dislike song
-            dispatch({ action: 'remove', id: currentSong.id })
+    const [ liked, setLiked ] = useState(false); 
+    const alreadyLiked = () => songs.findIndex(song => song.id === currentSong.id) > -1;
+    
+    function toggleLike() {
+        if(alreadyLiked()) {
+            dispatch({ type: 'remove', id: currentSong.id })
         } else {
-            // like song
-            dispatch({ action: 'add', song: {...currentSong} });
+            dispatch({ type: 'add', song: {...currentSong} });
         }
     }
 
+    useEffect(() => {
+        if(!songs && !currentSong) return;
+        if(alreadyLiked()) {
+            setLiked(true);
+        } else { setLiked(false); }
+    }, [ songs, currentSong ]);
+
     return ( currentSong && songs &&
-        <HomeButton className={'like size-12'} onClick={onClick}>
+        <HomeButton className={'like size-12'} onClick={toggleLike}>
         {
-            songs.indexOf(song => song.id === currentSong.id) > -1 ?
+            liked ?
             <HeartIcon /> : <HeartOutlineIcon />
         }
         </HomeButton>
