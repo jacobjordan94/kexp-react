@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { GlobalContext } from "../main";
 import PictureWithInfo from "../components/PictureWithInfo";
+import { useNavigate } from "react-router";
 
 function Likes() {
 
@@ -15,13 +16,18 @@ function Likes() {
     );
 }
 
-const LikesCard = ({ song }) => 
-    <div className="recent-card backdrop-blur-2xl rounded-lg p-2 transparent-border-dark border-4">
+const LikesCard = ({ song }) => {
+    const naviagte = useNavigate();
+    return <div 
+        className="recent-card backdrop-blur-2xl rounded-lg p-2 transparent-border-dark border-4 cursor-pointer"
+        onClick={() => naviagte('/song/' + song.id)}
+    >
         <PictureWithInfo
             image={song.thumbnail_uri}
             title={song.artist}
             subtitle={song.song}
         ></PictureWithInfo>
     </div>
+}
 
 export default Likes;
