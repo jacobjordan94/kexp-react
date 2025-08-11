@@ -5,6 +5,7 @@ import { HeartIcon, HomeIcon, QueueListIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as HeartOutlineIcon, HomeIcon as HomeOutlineIcon, QueueListIcon as QueueListOutlineIcon } from "@heroicons/react/24/outline";
 import AlbumArt from "./AlbumArt";
 import PictureWithInfo from "./PictureWithInfo";
+import PlayPauseButton from "./PlayPauseButton";
 
 export default function Footer({ currentPage, setCurrentPage, currentShow }) {
 
@@ -72,7 +73,11 @@ function NowPlaying({ currentSong }) {
             image={currentSong.thumbnail_uri}
             title={currentSong.artist || 'KEXP'}
             subtitle={currentSong.song || 'Airbreak'}
-        />
+        >
+            <div className="play-pause-wrap size-12 inline-flex items-center justify-center">
+                <PlayPauseButton className="size-8" />
+            </div>
+        </PictureWithInfo>
     )
 }
 
