@@ -23,7 +23,7 @@ export function HomeInformation({ currentSong }) {
                 <div className="flex flex-col flex-grow justify-between sm:flex-row sm:grow-0 pt-4 lg:pt-0 lg:grow-0 lg:px-8 lg:flex-col lg:justify-end lg:min-w-lg lg:gap-6">
                     <SongInformation currentSong={currentSong} />
                     <div className="hidden lg:block">
-                        <CurrentShowMini />
+                        <CurrentShowMini size="size-16" titleClass="text-lg max-w-2xs overflow-hidden overflow-ellipsis whitespace-nowrap" subtitleClass="text-md max-w-2xs overflow-hidden overflow-ellipsis whitespace-nowrap" />
                     </div>
                     <HomeButtons offset={false} className="hidden gap-6 sm:flex items-center lg:hidden" currentSong={currentSong}></HomeButtons>
                 </div>
