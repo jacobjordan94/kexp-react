@@ -10,18 +10,21 @@ import {
     ChatBubbleBottomCenterTextIcon as ChatBubbleBottomCenterTextOutlineIcon,
     HeartIcon as HeartOutlineIcon,
 } from '@heroicons/react/24/outline';
-import AlbumArt, { Image } from "../components/AlbumArt";
+import { Image } from "../components/AlbumArt";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../main";
+import CurrentShowMini from "../components/CurrentShow.components";
 
 export function HomeInformation({ currentSong }) {
-
     return ( currentSong &&
         <div className="home-information-wrapper w-full rounded-2xl backdrop-blur-2xl p-4 flex gap-4 border-4 transparent-border-dark sm:w-full h-full lg:flex-col lg:justify-between">
             <div className="w-full flex flex-col flex-grow lg:flex-row lg:flex-grow">
                 <Image image={currentSong.image_uri} className="album-art-wrapper rounded-2xl border-4 transparent-border-light overflow-hidden flex-grow h-full" />
-                <div className="flex flex-col flex-grow justify-between sm:flex-row sm:grow-0 pt-4 lg:pt-0 lg:grow-0">
+                <div className="flex flex-col flex-grow justify-between sm:flex-row sm:grow-0 pt-4 lg:pt-0 lg:grow-0 lg:px-8 lg:flex-col lg:justify-end lg:min-w-lg lg:gap-6">
                     <SongInformation currentSong={currentSong} />
+                    <div className="hidden lg:block">
+                        <CurrentShowMini />
+                    </div>
                     <HomeButtons offset={false} className="hidden gap-6 sm:flex items-center lg:hidden" currentSong={currentSong}></HomeButtons>
                 </div>
             </div>

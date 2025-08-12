@@ -3,9 +3,9 @@ import { useNavigate } from "react-router";
 import { GlobalContext } from "../main";
 import { HeartIcon, HomeIcon, QueueListIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as HeartOutlineIcon, HomeIcon as HomeOutlineIcon, QueueListIcon as QueueListOutlineIcon } from "@heroicons/react/24/outline";
-import AlbumArt from "./AlbumArt";
 import PictureWithInfo from "./PictureWithInfo";
 import PlayPauseButton from "./PlayPauseButton";
+import CurrentShowMini from "./CurrentShow.components";
 
 export default function Footer({ currentPage, setCurrentPage, currentShow }) {
 
@@ -76,20 +76,6 @@ function NowPlaying({ currentSong }) {
         >
             <div className="play-pause-wrap size-12 inline-flex items-center justify-center">
                 <PlayPauseButton className="size-8" />
-            </div>
-        </PictureWithInfo>
-    )
-}
-
-function CurrentShowMini({ currentShow }) {
-    return ( currentShow &&
-        <PictureWithInfo 
-            image={currentShow.program_image_uri} 
-            title={currentShow.program_name}
-            subtitle={ currentShow.host_names.join(', ') }
-        >
-            <div className="show-host-image size-12 overflow-hidden rounded-full">
-                <AlbumArt image={ currentShow.image_uri } />
             </div>
         </PictureWithInfo>
     )
