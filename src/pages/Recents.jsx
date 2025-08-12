@@ -19,7 +19,7 @@ function Recents() {
 const RecentCard = ({ song }) =>
     <div className="recent-card backdrop-blur-2xl rounded-lg p-1 transparent-border-dark border-4">
         <PictureWithInfo
-            image={song.thumbnail_uri}
+            image={song.thumbnail_uri || song.image_uri}
             title={song.artist}
             subtitle={song.song}
         ></PictureWithInfo>
