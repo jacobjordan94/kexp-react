@@ -20,7 +20,9 @@ export function HomeInformation({ currentSong }) {
     return ( currentSong &&
         <div className="home-information-wrapper w-full rounded-2xl backdrop-blur-2xl p-4 flex gap-4 border-4 transparent-border-dark sm:w-full h-full lg:flex-col lg:justify-between">
             <div className="w-full flex flex-col flex-grow lg:flex-row lg:flex-grow">
-                <Image image={currentSong.image_uri} className="album-art-wrapper rounded-2xl border-4 transparent-border-light overflow-hidden flex-grow h-full" />
+                <Image image={currentSong.image_uri} className="album-art-wrapper rounded-2xl border-4 transparent-border-light overflow-hidden flex-grow h-full lg:flex lg:items-center lg:justify-center">
+                    <PlayPauseButton />
+                </Image>
                 <div className="flex flex-col flex-grow justify-between sm:flex-row sm:grow-0 pt-4 lg:pt-0 lg:grow-0 lg:px-8 lg:flex-col lg:justify-end lg:min-w-lg lg:gap-6">
                     <div class="song-information-wrapper contents lg:flex lg:flex-row lg:justify-between items-center">
                         <SongInformation currentSong={currentSong} />
@@ -32,11 +34,6 @@ export function HomeInformation({ currentSong }) {
                         <CurrentShowMini size="size-16" titleClass="text-lg max-w-2xs overflow-hidden overflow-ellipsis whitespace-nowrap" subtitleClass="text-md max-w-2xs overflow-hidden overflow-ellipsis whitespace-nowrap" />
                     </div>
                     <HomeButtons offset={false} className="hidden gap-6 sm:flex items-center lg:hidden" currentSong={currentSong}></HomeButtons>
-                </div>
-            </div>
-            <div className="bottom hidden lg:flex justify-center">
-                <div className="controls-wrap">
-                    <HomeButtons offset={false} currentSong={currentSong} className="gap-16 flex" />
                 </div>
             </div>
         </div>
