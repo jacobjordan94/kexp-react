@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { loadImage } from "../functions/LoadImage";
 import Spinner from "./Spinner";
 
-function AlbumArt({image, className}) {
+function AlbumArt({image, className = ''}) {
     return <Image image={image} className={className} />
 }
 
