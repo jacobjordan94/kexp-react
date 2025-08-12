@@ -98,6 +98,34 @@ button:focus-visible {
   background-color: rgba(0, 0, 0, 0.9);
 }
 
+.light-alpha-1 {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.light-alpha-2 {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.light-alpha-3 {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.light-alpha-4 {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.light-alpha-5 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.light-alpha-6 {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.light-alpha-7 {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.light-alpha-8 {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.light-alpha-9 {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
 .reset-padding {
   padding: 0;
 }
