@@ -24,6 +24,7 @@ export function HomeInformation({ currentSong }) {
                     <PlayPauseButton />
                 </Image>
                 <div className="flex flex-col flex-grow justify-between sm:flex-row sm:grow-0 pt-4 lg:pt-0 lg:grow-0 lg:px-8 lg:flex-col lg:justify-end lg:min-w-lg lg:gap-6">
+                    <CommentBox comment={currentSong.comment} className="hidden lg:block max-w-lg overflow-y-scroll" />
                     <div class="song-information-wrapper contents lg:flex lg:flex-row lg:justify-between items-center">
                         <SongInformation currentSong={currentSong} />
                         <div className="like-wrapper hidden lg:block hover:animate-pulse">
@@ -134,6 +135,17 @@ function LikeButton({ currentSong }) {
             <HeartIcon /> : <HeartOutlineIcon />
         }
         </HomeButton>
+    );
+}
+
+function CommentBox({comment = '', className}) {
+    return ( comment &&
+        <div className={"song-comment-box light-alpha-1 p-4 rounded-2xl border-4 transparent-border-light before:content-['\"'] " + className}>
+            <span className="inline-flex items-center justify-center text-4xl font-serif font-bold italic me-4">"</span>
+            <span className="italic font-light text-lg">
+                { comment }
+            </span>
+        </div>
     );
 }
 
