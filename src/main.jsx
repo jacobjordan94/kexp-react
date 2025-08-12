@@ -5,7 +5,7 @@ import { Route, BrowserRouter, Routes } from 'react-router'
 import Home from './pages/Home'
 import Footer from './components/Footer.components'
 import Recents from './pages/Recents'
-import AlbumArt from './components/AlbumArt'
+import { Image } from './components/AlbumArt'
 import useGlobals from './hooks/Globals'
 import Likes from './pages/Likes'
 import Song from './pages/Song'
@@ -40,9 +40,7 @@ function App() {
           <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} currentShow={globalState.currentShow} />
         </GlobalContext>
       </BrowserRouter>
-      <div className="background-image absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[-1] blur-sm brightness-80">
-        <AlbumArt image={globalState.currentSong.image_uri}/>
-      </div>
+      <Image image={ globalState.currentSong.image_uri } className="background-image absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[-1] blur-sm brightness-80" />
     </div>
   )
 }
