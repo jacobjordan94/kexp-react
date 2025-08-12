@@ -10,7 +10,7 @@ export function Image({
     image, 
     className = '', 
     fallback = 'https://www.kexp.org/media/filer_public/d8/42/d8422d8d-91b0-4fa4-bd8e-fbb64af4b147/live_on_kexp_mic_500x500_-_nataworry_photography.jpg', 
-    children 
+    children = <></>
 }) {
     const [ src, setSrc ] = useState('');
     const [ loading, setLoading ] = useState(true);
