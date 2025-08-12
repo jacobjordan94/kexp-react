@@ -21,11 +21,13 @@ export function HomeInformation({ currentSong }) {
         <div className="home-information-wrapper w-full rounded-2xl backdrop-blur-2xl p-4 flex gap-4 border-4 transparent-border-dark sm:w-full h-full lg:flex-col lg:justify-between">
             <div className="w-full flex flex-col flex-grow lg:flex-row lg:flex-grow">
                 <Image image={currentSong.image_uri} className="album-art-wrapper rounded-2xl border-4 transparent-border-light overflow-hidden flex-grow h-full lg:flex lg:items-center lg:justify-center">
-                    <PlayPauseButton />
+                    <div className="hidden lg:inline">
+                        <PlayPauseButton />
+                    </div>
                 </Image>
                 <div className="flex flex-col flex-grow justify-between sm:flex-row sm:grow-0 pt-4 lg:pt-0 lg:grow-0 lg:px-8 lg:flex-col lg:justify-end lg:min-w-lg lg:gap-6">
                     <CommentBox comment={currentSong.comment} className="hidden lg:block max-w-lg overflow-y-scroll" />
-                    <div class="song-information-wrapper contents lg:flex lg:flex-row lg:justify-between items-center">
+                    <div className="song-information-wrapper contents lg:flex lg:flex-row lg:justify-between items-center">
                         <SongInformation currentSong={currentSong} />
                         <div className="like-wrapper hidden lg:block hover:animate-pulse">
                             <BaseLikeButton className=" size-12" currentSong={currentSong} />
