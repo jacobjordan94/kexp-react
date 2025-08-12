@@ -14,6 +14,7 @@ import { Image } from "../components/AlbumArt";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../main";
 import CurrentShowMini from "../components/CurrentShow.components";
+import BaseLikeButton from "../components/BaseLikeButton";
 
 export function HomeInformation({ currentSong }) {
     return ( currentSong &&
@@ -21,7 +22,12 @@ export function HomeInformation({ currentSong }) {
             <div className="w-full flex flex-col flex-grow lg:flex-row lg:flex-grow">
                 <Image image={currentSong.image_uri} className="album-art-wrapper rounded-2xl border-4 transparent-border-light overflow-hidden flex-grow h-full" />
                 <div className="flex flex-col flex-grow justify-between sm:flex-row sm:grow-0 pt-4 lg:pt-0 lg:grow-0 lg:px-8 lg:flex-col lg:justify-end lg:min-w-lg lg:gap-6">
-                    <SongInformation currentSong={currentSong} />
+                    <div class="song-information-wrapper contents lg:flex lg:flex-row lg:justify-between items-center">
+                        <SongInformation currentSong={currentSong} />
+                        <div className="like-wrapper hidden lg:block hover:animate-pulse">
+                            <BaseLikeButton className=" size-12" currentSong={currentSong} />
+                        </div>
+                    </div>
                     <div className="hidden lg:block">
                         <CurrentShowMini size="size-16" titleClass="text-lg max-w-2xs overflow-hidden overflow-ellipsis whitespace-nowrap" subtitleClass="text-md max-w-2xs overflow-hidden overflow-ellipsis whitespace-nowrap" />
                     </div>
@@ -37,21 +43,23 @@ export function HomeInformation({ currentSong }) {
     );
 }
 
-const SongInformation = ({ currentSong, className }) => 
+const SongInformation = ({ currentSong, className }) =>
     <div className={"information-wrapper whitespace-nowrap " + className}>
-        <div className="artist text-2xl flex flex-row items-center">
-            <div className="icon size-10 flex items-center justify-center me-2">
-                <UserIcon className="size-8" />
+        <div className="text-wrapper">
+            <div className="artist text-2xl flex flex-row items-center">
+                <div className="icon size-10 flex items-center justify-center me-2">
+                    <UserIcon className="size-8" />
+                </div>
+                <div className="overflow-hidden">
+                    { currentSong.artist || 'KEXP' }
+                </div>
             </div>
-            <div className="overflow-hidden">
-                { currentSong.artist || 'KEXP' }
+            <div className="song text-lg flex flex-row items-center mt-0.5">
+                <div className="icon w-10 flex justify-center me-2">
+                    <MusicalNoteIcon className="size-4" />
+                </div>
+                { currentSong.song || 'Airbreak' }
             </div>
-        </div>
-        <div className="song text-lg flex flex-row items-center mt-0.5">
-            <div className="icon w-10 flex justify-center me-2">
-                <MusicalNoteIcon className="size-4" />
-            </div>
-            { currentSong.song || 'Airbreak' }
         </div>
     </div>
 
