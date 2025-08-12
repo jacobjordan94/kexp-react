@@ -23,6 +23,9 @@ function useGlobals() {
         if(currentSong && globalState.currentSong && currentSong.show !== globalState.currentSong.show) refreshCurrentShow();
         if(currentSong && recents && currentSong.play_type === 'trackplay') setRecents(old => [ {...currentSong}, ...old]);
         setGlobalState({ currentSong });
+        if(currentSong && (!globalState.currentBackground || globalState.currentBackground !== currentSong.image_uri)) {
+            setGlobalState({ currentBackground: currentSong.image_uri })
+        }
     }, [ currentSong ]);
 
     useEffect(() => {
