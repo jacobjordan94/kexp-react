@@ -1,8 +1,9 @@
 import { HeartIcon } from "@heroicons/react/24/solid";
-import { HeartOutlineIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react"
+import { HeartIcon as HeartOutlineIcon } from "@heroicons/react/24/outline";
+import { useContext, useEffect, useState } from "react"
+import { GlobalContext } from "../main";
 
-function LikeButton({ className, currentSong }) {
+function BaseLikeButton({ className, currentSong }) {
     const { globalState: { likedSongs: { songs, dispatch } } } = useContext(GlobalContext);
     const [ liked, setLiked ] = useState();
 
@@ -29,4 +30,4 @@ function LikeButton({ className, currentSong }) {
         </button>;
 }
 
-export default LikeButton;
+export default BaseLikeButton;
