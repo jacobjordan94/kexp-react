@@ -3,17 +3,20 @@ import AlbumArt, { Image } from "./AlbumArt";
 import PictureWithInfo from "./PictureWithInfo";
 import { GlobalContext } from "../main";
 
-function CurrentShowMini({}) {
+function CurrentShowMini({ size = 'size-12', titleClass = '', subtitleClass = 'text-xs' }) {
     
     const { globalState: { currentShow } } = useContext(GlobalContext);
     
     return ( currentShow &&
         <PictureWithInfo
             image={currentShow.program_image_uri} 
+            imageSize={size}
             title={currentShow.program_name}
+            titleClass={titleClass}
+            subtitleClass={subtitleClass}
             subtitle={ currentShow.host_names.join(', ') }
         >
-            <HostImage image={ currentShow.image_uri }  />
+            <HostImage size={size} image={ currentShow.image_uri }  />
         </PictureWithInfo>
     )
 }
