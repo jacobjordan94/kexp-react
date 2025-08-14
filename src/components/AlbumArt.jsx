@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { loadImage } from "../functions/LoadImage";
 import Spinner from "./Spinner";
+import useWikiImage from "../hooks/WikiImage";
 
 function AlbumArt({image, className = ''}) {
     return <Image image={image} className={className} />
@@ -23,6 +24,7 @@ export function Image({
         } catch {
             imageToUse = await loadImage(fallback);
         }
+        imageToUse = imageToUse.replace(/\s/g, '%20');
         setSrc(imageToUse);
         setLoading(false);
     }
@@ -33,7 +35,7 @@ export function Image({
 
     return (
         <div 
-            style={{ backgroundImage: src ? `url(${src})` : '' }} 
+            style={{ backgroundImage: src ? `url("${src}")` : '' }} 
             className={"bg-center bg-no-repeat bg-cover " + className}
         >
             { !loading ? children : <Spinner /> }
@@ -42,11 +44,11 @@ export function Image({
     );
 }
 
-export function WikiImage(image, className, fallback, children) {
+export function WikiImage({image, className, fallback, children}) {
     const [ src, setSrc ] = useState();
 
     useEffect(() => {
-        if(!image) return;
+        if(!image || typeof image !== 'string') return;
         const img = image.split(':')[1];
         const image_uri = 'https://commons.wikimedia.org/wiki/Special:FilePath/' + img;
         setSrc(image_uri)
@@ -56,6 +58,13 @@ export function WikiImage(image, className, fallback, children) {
         <Image image={src} className={className} fallback={fallback}>
             { children || <></> }
         </Image>
+}
+
+export function ArtistImage({ artistName, className }) {
+    const [ wikiImages ] = useWikiImage(artistName);
+    useEffect(() => console.log(wikiImages), [ wikiImages ])
+    return (wikiImages) &&
+        <WikiImage image={wikiImages[0]} className={className}></WikiImage>
 }
 
 export default AlbumArt;

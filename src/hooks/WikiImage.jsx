@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import useJsonPFetch from "./FetchJsonP";
 
 function useWikiImage(artistName) {
+    const [ state, _setState ] = useState();
+    if(!artistName) {
+        _setState([]);
+        return [ state ];
+    };
     const formattedName = artistName.replace(/\s+/g, '_');
     const [ response ] = useJsonPFetch('https://en.wikipedia.org/w/api.php', {
         action: 'query',
@@ -9,7 +14,6 @@ function useWikiImage(artistName) {
         titles: formattedName,
         prop: 'images',
     });
-    const [ state, _setState ] = useState();
 
     function setState() {
         const pages = response.query.pages;
