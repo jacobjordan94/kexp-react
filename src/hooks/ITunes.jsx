@@ -18,10 +18,6 @@ function useITunes(artist, song) {
     
     useEffect(() => {
         if(artistResponse && songResponse) {
-            console.log('Artist response');
-            console.log(artistResponse);
-            console.log('Song response');
-            console.log(songResponse);
             setState({ artistResponse, songResponse });
         }
     }, [ artistResponse, songResponse ])
