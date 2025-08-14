@@ -42,4 +42,20 @@ export function Image({
     );
 }
 
+export function WikiImage(image, className, fallback, children) {
+    const [ src, setSrc ] = useState();
+
+    useEffect(() => {
+        if(!image) return;
+        const img = image.split(':')[1];
+        const image_uri = 'https://commons.wikimedia.org/wiki/Special:FilePath/' + img;
+        setSrc(image_uri)
+    }, [ image ]);
+
+    return src &&
+        <Image image={src} className={className} fallback={fallback}>
+            { children || <></> }
+        </Image>
+}
+
 export default AlbumArt;
