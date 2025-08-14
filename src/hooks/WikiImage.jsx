@@ -17,9 +17,9 @@ function useWikiImage(artistName) {
         const pageId = Object.keys(pages)[0];
         if(pages[pageId].hasOwnProperty('original')) {
             const imageUrl = pages[pageId].original.source;
-            setState(imageUrl);
+            _setState(imageUrl);
         } else {
-            setState(null)
+            _setState(null)
         }
     }
 
