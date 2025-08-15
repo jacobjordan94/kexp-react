@@ -61,8 +61,12 @@ export function WikiImage({image, className, fallback, children}) {
 }
 
 export function ArtistImage({ artistName, className }) {
-    const [ wikiImages ] = useWikiImage(artistName);
-    useEffect(() => console.log(wikiImages), [ wikiImages ])
+    const [ wikiImages, searchWikiImages ] = useWikiImage(artistName);
+
+    useEffect(() => {
+        if(!artistName) return;
+        searchWikiImages(artistName);
+    }, [ artistName ]);
     return (wikiImages) &&
         <WikiImage image={wikiImages[0]} className={className}></WikiImage>
 }
