@@ -20,7 +20,6 @@ function Song() {
         song && 
         <div className="page page-song relative w-full h-full">
             <SongBody song={song} />
-            <Image image={song.image_uri} className="absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[-1] blur-sm"></Image>
         </div>
     );
 }
