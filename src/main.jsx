@@ -1,7 +1,7 @@
-import { createContext, StrictMode, useState } from 'react'
+import { createContext, StrictMode, useContext, useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { Route, BrowserRouter, Routes } from 'react-router'
+import { Route, BrowserRouter, Routes, useLocation } from 'react-router'
 import Home from './pages/Home'
 import Footer from './components/Footer.components'
 import Recents from './pages/Recents'
@@ -29,18 +29,34 @@ function App() {
     <div className="app-root flex flex-col h-lvh w-lvw relative">
       <BrowserRouter>
         <GlobalContext value={{ globalState, setGlobalState }}>
-          <section className='flex-grow overflow-y-scroll'>
-            <Routes>
-                <Route index element={<Home />} />
-                <Route path="/recents" element={<Recents />} />
-                <Route path="/likes"   element={<Likes />} />
-                <Route path="/song/:id" element={<Song />}/>
-            </Routes>
-          </section>
-          <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} currentShow={globalState.currentShow} />
+          <BackgroundHelper>
+            <section className='flex-grow overflow-y-scroll'>
+              <Routes>
+                  <Route index element={<Home />} />
+                  <Route path="/recents" element={<Recents />} />
+                  <Route path="/likes"   element={<Likes />} />
+                  <Route path="/song/:id" element={<Song />}/>
+              </Routes>
+            </section>
+            <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} currentShow={globalState.currentShow} />
+          </BackgroundHelper>
         </GlobalContext>
       </BrowserRouter>
       <Image image={ globalState.background.image } className="background-image absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[-2] blur-sm brightness-80" />
     </div>
   )
+}
+
+function BackgroundHelper({ children }) {
+  const { globalState: { currentSong, background: { setCurrentBackground } } } = useContext(GlobalContext);
+  const defaultBackgroundPages = ['/likes', '/recents'];
+  const loc = useLocation();
+  useEffect(() => {
+    if(!loc || !currentSong) return;
+    const usesDefaultBG = defaultBackgroundPages.some(dbp => dbp.includes(location.pathname) && location.pathname !== '/'); 
+    if(loc.pathname === '/' || usesDefaultBG) {
+      setCurrentBackground(currentSong.image_uri || currentSong.thumbnail_uri);
+    }
+  }, [loc])
+  return children;
 }
