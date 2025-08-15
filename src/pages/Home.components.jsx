@@ -10,7 +10,7 @@ import {
     ChatBubbleBottomCenterTextIcon as ChatBubbleBottomCenterTextOutlineIcon,
     HeartIcon as HeartOutlineIcon,
 } from '@heroicons/react/24/outline';
-import { Image } from "../components/AlbumArt";
+import { ArtistImage, Image } from "../components/AlbumArt";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../main";
 import CurrentShowMini from "../components/CurrentShow.components";
@@ -26,6 +26,7 @@ export function HomeInformation({ currentSong }) {
                     </div>
                 </Image>
                 <div className="flex flex-col flex-grow justify-between sm:flex-row sm:grow-0 pt-4 lg:pt-0 lg:grow-0 lg:px-8 lg:flex-col lg:justify-end lg:min-w-lg lg:gap-6">
+                    <ArtistImage artistName={currentSong.artist} className="hidden lg:flex lg:flex-grow rounded-2xl border-4 transparent-border-light" />
                     <CommentBox comment={currentSong.comment} className="hidden lg:block max-w-lg overflow-y-scroll" />
                     <div className="song-information-wrapper contents lg:flex lg:flex-row lg:justify-between items-center">
                         <SongInformation currentSong={currentSong} />
