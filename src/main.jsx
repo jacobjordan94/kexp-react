@@ -25,7 +25,7 @@ function App() {
   );
 
   return(
-    globalState.currentSong && 
+    globalState.currentSong && globalState.background && 
     <div className="app-root flex flex-col h-lvh w-lvw relative">
       <BrowserRouter>
         <GlobalContext value={{ globalState, setGlobalState }}>
@@ -40,7 +40,7 @@ function App() {
           <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} currentShow={globalState.currentShow} />
         </GlobalContext>
       </BrowserRouter>
-      <Image image={ globalState.currentBackground } className="background-image absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[-2] blur-sm brightness-80" />
+      <Image image={ globalState.background.image } className="background-image absolute top-0 left-0 right-0 bottom-0 pointer-events-none z-[-2] blur-sm brightness-80" />
     </div>
   )
 }

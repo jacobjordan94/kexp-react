@@ -13,6 +13,7 @@ function useGlobals() {
     const [ currentSong ] = useCurrentSong();
     const [ recents, setRecents ] = useRecents();
     const [ likedSongs, likedSongsDispatch ] = useLikedSongs();
+    const [ currentBackground, setCurrentBackground ] = useState();
 
     function setGlobalState(partialState) {
         _setGlobalState(oldState => ({ ...oldState, ...partialState }));
@@ -24,7 +25,7 @@ function useGlobals() {
         if(currentSong && recents && currentSong.play_type === 'trackplay') setRecents(old => [ {...currentSong}, ...old]);
         setGlobalState({ currentSong });
         if(currentSong && (!globalState.currentBackground || globalState.currentBackground !== currentSong.image_uri)) {
-            setGlobalState({ currentBackground: currentSong.image_uri })
+            setCurrentBackground(currentSong.image_uri);
         }
     }, [ currentSong ]);
 
@@ -42,6 +43,12 @@ function useGlobals() {
         if(!likedSongs) return;
         setGlobalState({ likedSongs: { songs: likedSongs, dispatch: likedSongsDispatch }});
     }, [ likedSongs ]);
+
+    useEffect(() => {
+        if(currentBackground || currentBackground === '') {
+            setGlobalState({ background: { image: currentBackground, setCurrentBackground } })
+        }
+    }, [ currentBackground ]);
 
     return [ globalState, setGlobalState ];
 }
