@@ -1,15 +1,14 @@
-import useITunes from "../hooks/ITunes";
-import useWikiImage from "../hooks/WikiImage";
+import { ArtistImage } from "../components/AlbumArt";
 
 export function SongBody({ song }) {
-    const { artistResponse, songResponse } = useITunes(song.artist, song.song);
-    const [ wikiImage ] = useWikiImage(song.artist);
-
-    return ( (artistResponse && songResponse && wikiImage) &&
-        <div className="song-body">
-            { JSON.stringify(artistResponse) }
-            { JSON.stringify(songResponse) }
-            { wikiImage }
+    return (
+        <div className="song-body p-4">
+            <div className="top flex flex-col">
+                <ArtistImage artistName={song.artist} className="size-full w-full h-64"></ArtistImage>
+                <div className="artist-name">
+                    { song.song }
+                </div>
+            </div>
         </div>
     )
 }
