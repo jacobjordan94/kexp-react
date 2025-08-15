@@ -1,13 +1,12 @@
 import { 
-    ChatBubbleBottomCenterTextIcon, 
     MusicalNoteIcon, 
     UserIcon,
     HeartIcon,
     PlayIcon,
     PauseIcon,
+    InformationCircleIcon,
 } from "@heroicons/react/24/solid";
 import { 
-    ChatBubbleBottomCenterTextIcon as ChatBubbleBottomCenterTextOutlineIcon,
     HeartIcon as HeartOutlineIcon,
 } from '@heroicons/react/24/outline';
 import { ArtistImage, Image } from "../components/AlbumArt";
@@ -15,6 +14,7 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../main";
 import CurrentShowMini from "../components/CurrentShow.components";
 import BaseLikeButton from "../components/BaseLikeButton";
+import { useNavigate } from "react-router";
 
 export function HomeInformation({ currentSong }) {
     return ( currentSong &&
@@ -80,20 +80,14 @@ const HomeButton = ({ className, onClick, children, disabled = false }) =>
     </div>
 
 function InformationButton({ currentSong })  {
-    function onClick() {
-        console.log(currentSong.comment);
-    }
+    const navigate = useNavigate();
+
     return ( currentSong &&
         <HomeButton 
             className={'information size-12'} 
-            onClick={onClick}
-            disabled={ !currentSong.comment || currentSong.comment === '' || currentSong.play_type === 'airbreak' }
+            onClick={() => navigate('/song/' + currentSong.id)}
         >
-        {
-            currentSong.comment && currentSong.comment !== '' ?     
-            <ChatBubbleBottomCenterTextIcon /> :
-            <ChatBubbleBottomCenterTextOutlineIcon />
-        }
+            <InformationCircleIcon /> :
         </HomeButton>
     );
 }
