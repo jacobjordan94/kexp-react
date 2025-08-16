@@ -84,6 +84,7 @@ function InformationButton({ currentSong })  {
 
     return ( currentSong &&
         <HomeButton 
+            disabled={ currentSong.play_type !== 'trackplay' }
             className={'information size-12'} 
             onClick={() => navigate('/song/' + currentSong.id)}
         >
