@@ -1,5 +1,5 @@
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 import { GlobalContext } from "../main";
 import { HeartIcon, HomeIcon, QueueListIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as HeartOutlineIcon, HomeIcon as HomeOutlineIcon, QueueListIcon as QueueListOutlineIcon } from "@heroicons/react/24/outline";
@@ -7,27 +7,34 @@ import PictureWithInfo from "./PictureWithInfo";
 import PlayPauseButton from "./PlayPauseButton";
 import CurrentShowMini from "./CurrentShow.components";
 
-export default function Footer({ currentPage, setCurrentPage, currentShow }) {
+export default function Footer({}) {
 
-    const { globalState: { currentSong } } = useContext(GlobalContext);
+    const { globalState: { currentSong, currentShow } } = useContext(GlobalContext);
+    const [ currentPath, setCurrentPath ] = useState();
+    const loc = useLocation();
   
     const navigate = useNavigate();
     function onNavigate(page) {
         navigate(page);
-        setCurrentPage(page);
     }
+
+    useEffect(() => {
+        if(!loc) return;
+        const path = loc.pathname === '/' ? '/' : ('/' + loc.pathname.split('/')[1]);
+        setCurrentPath(path);
+    }, [ loc ]);
 
     return ( currentSong &&
         <footer className=''>
             <div className="footer-wrap">
                 <div style={{'--tw-shadow-color': 'black'}} className="relative overflow-hidden backdrop-blur-2xl px-4 pt-4">
                     <div className="controls">
-                        { (currentPage === '/') ? 
+                        { (currentPath === '/') ? 
                             <div className="sm:hidden">
                                 <CurrentShowMini currentShow={currentShow} /> 
                             </div> :
                             <NowPlaying currentSong={currentSong} /> }
-                        <Navigation currentPage={currentPage} onNavigate={onNavigate} />
+                        <Navigation currentPage={currentPath} onNavigate={onNavigate} />
                     </div>
                 </div>
             </div>

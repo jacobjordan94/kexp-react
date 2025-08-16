@@ -20,9 +20,6 @@ createRoot(document.getElementById('root')).render(
 
 function App() {
   const [ globalState, setGlobalState ] = useGlobals();
-  const [ currentPage, setCurrentPage ] = useState(
-    location.pathname
-  );
 
   return(
     globalState.currentSong && globalState.background && 
@@ -38,7 +35,7 @@ function App() {
                   <Route path="/song/:id" element={<Song />}/>
               </Routes>
             </section>
-            <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} currentShow={globalState.currentShow} />
+            <Footer />
           </BackgroundHelper>
         </GlobalContext>
       </BrowserRouter>
