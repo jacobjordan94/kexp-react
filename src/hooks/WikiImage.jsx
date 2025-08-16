@@ -41,7 +41,7 @@ function useWikiImage() {
             ).map(image => image.title);
             return images;
         }
-        return null;
+        return [];
     }
 
 

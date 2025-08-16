@@ -44,6 +44,11 @@ export function Image({
     );
 }
 
+export function DefaultImage({ className, children }) {
+    const image = 'https://www.kexp.org/media/filer_public/d8/42/d8422d8d-91b0-4fa4-bd8e-fbb64af4b147/live_on_kexp_mic_500x500_-_nataworry_photography.jpg';
+    return <Image image={image} className={className}>{ children }</Image>;
+}
+
 export function WikiImage({image, className, fallback, children}) {
     const [ src, setSrc ] = useState();
 
@@ -62,13 +67,21 @@ export function WikiImage({image, className, fallback, children}) {
 
 export function ArtistImage({ artistName, className, children }) {
     const [ wikiImages, searchWikiImages ] = useWikiImage(artistName);
+    const [ ready, setReady ] = useState(false);
 
     useEffect(() => {
         if(!artistName) return;
         searchWikiImages(artistName);
     }, [ artistName ]);
-    return (wikiImages) &&
-        <WikiImage image={wikiImages[0]} className={className}>{children}</WikiImage>
+
+    useEffect(() => {
+        if(!wikiImages) return;
+        setReady(true);
+    }, [ wikiImages ])
+
+    return ready && wikiImages.length ?
+        <WikiImage image={wikiImages[0] || ''} className={className}>{children}</WikiImage> :
+        <DefaultImage className={className}>{ children }</DefaultImage>
 }
 
 export default AlbumArt;
