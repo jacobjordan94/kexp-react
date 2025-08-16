@@ -2,6 +2,7 @@ import { CloudIcon, MusicalNoteIcon, UserIcon } from "@heroicons/react/24/solid"
 import { ArtistImage } from "../components/AlbumArt";
 import BaseLikeButton from "../components/BaseLikeButton";
 import CommentBox from "../components/CommentBox";
+import { Show } from "../components/CurrentShow.components";
 
 
 export function SongBody({ song }) {
@@ -11,6 +12,7 @@ export function SongBody({ song }) {
                 <ArtistCard song={song} />
                 <DetailedSongInformation song={song} />
                 <CommentBox comment={song.comment} className="backdrop-blur-xl" />
+                <Show id={song.show} />
             </div>
         </div>
     )
