@@ -6,7 +6,7 @@ export default function useCurrentSong(interval = (30 * 1000)) {
         fomat: 'json', limit: '1', ordering: '-airdate', playlsit_location: '3',
     };
     const url = 'https://api.kexp.org/v2/plays/';
-    const [ response ] = useFetch(url, params, { autoRefresh: true, interval: interval });
+    const [ response ] = useFetch(url, params, { autoRefresh: true, interval: interval, makeRequestOnStart: true });
     const [ currentSong, setCurrentSong ] = useState();
 
     useEffect(() => {
