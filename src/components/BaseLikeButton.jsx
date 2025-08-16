@@ -25,7 +25,7 @@ function BaseLikeButton({ className, currentSong }) {
     }, [ currentSong, songs ]);
 
     return currentSong &&
-        <button disabled={currentSong.play_type !== 'trackplay'} className={'reset-padding song-like-button ' + className} onClick={toggleLike}>
+        <button disabled={currentSong.play_type !== 'trackplay'} className={'reset-padding song-like-button disabled:pointer-events-none disabled:opacity-50 ' + className} onClick={toggleLike}>
             { liked ? <HeartIcon /> : <HeartOutlineIcon /> }
         </button>
 }

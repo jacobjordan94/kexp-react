@@ -60,7 +60,7 @@ export function WikiImage({image, className, fallback, children}) {
         </Image>
 }
 
-export function ArtistImage({ artistName, className }) {
+export function ArtistImage({ artistName, className, children }) {
     const [ wikiImages, searchWikiImages ] = useWikiImage(artistName);
 
     useEffect(() => {
@@ -68,7 +68,7 @@ export function ArtistImage({ artistName, className }) {
         searchWikiImages(artistName);
     }, [ artistName ]);
     return (wikiImages) &&
-        <WikiImage image={wikiImages[0]} className={className}></WikiImage>
+        <WikiImage image={wikiImages[0]} className={className}>{children}</WikiImage>
 }
 
 export default AlbumArt;
