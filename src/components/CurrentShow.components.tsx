@@ -76,7 +76,7 @@ function HostsContainer({ hosts }) {
                 <div className="title text-xl font-semibold">{ hosts.length > 1 ? 'Hosts' : 'Host' }</div>
                 <div className="flex flex-col gap-3 ps-2">{ 
                     hosts.map(id => 
-                        <HostWithName key={'host-' + id} imageSize='size-14' textSize='text-lg' id={id} />
+                        <HostWithName key={'host-' + id} imageSize='size-12' textSize='text-lg' id={id} />
                 )}</div>
             </div>
 }
