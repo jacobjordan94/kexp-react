@@ -1,14 +1,14 @@
-import { createContext, StrictMode, useContext, useEffect, useState } from 'react'
+import { createContext, StrictMode, useContext, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { Route, BrowserRouter, Routes, useLocation } from 'react-router'
 import Home from './pages/Home'
 import Footer from './components/Footer.components'
-import Recents from './pages/Recents'
 import { Image } from './components/AlbumArt'
 import useGlobals from './hooks/Globals'
-import Likes from './pages/Likes'
 import Song from './pages/Song'
+import SongListLayout from './layouts/SongListLayout'
+import { SongList } from './components/SongList'
 
 export const GlobalContext = createContext();
 
@@ -22,7 +22,7 @@ function App() {
   const [ globalState, setGlobalState ] = useGlobals();
 
   return(
-    globalState.currentSong && globalState.background && 
+    globalState.currentSong && globalState.background &&  globalState.recents && globalState.likedSongs &&
     <div className="app-root flex flex-col h-lvh w-lvw relative">
       <BrowserRouter>
         <GlobalContext value={{ globalState, setGlobalState }}>
@@ -30,8 +30,10 @@ function App() {
             <section className='flex-grow overflow-y-scroll'>
               <Routes>
                   <Route index element={<Home />} />
-                  <Route path="/recents" element={<Recents />} />
-                  <Route path="/likes"   element={<Likes />} />
+                  <Route element={ <SongListLayout /> }>
+                    <Route path="/recents" element={<SongList songs={globalState.recents} />} />
+                    <Route path="/likes"   element={<SongList songs={globalState.likedSongs.songs}/>} />
+                  </Route>
                   <Route path="/song/:id" element={<Song />}/>
               </Routes>
             </section>
