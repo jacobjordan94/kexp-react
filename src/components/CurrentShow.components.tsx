@@ -21,17 +21,21 @@ export function Show({ show, id = null, className = '' }) {
     }, [ id ]);
 
     return ( finalShow &&
-        <div className={"current-show p-2 flex flex-col gap-4" + className}>
-            <div className="show-info flex items-end gap-4">
-                {/* <div className="show-art-wrapper">
-                    <Image image={finalShow.program_image_uri} className="size-20 rounded-2xl overflow-hidden" />
-                </div> */}
-                <div className="show-text-wrapper flex flex-col text gap-2">
-                    <div className="program-name text-2xl font-semibold">{ finalShow.program_name }</div>
-                    <div className="tagline">{ finalShow.tagline }</div>
+        <div className={"current-show rounded-2xl overflow-hidden border-2 transparent-border-dark " + className}>
+            <Image image={finalShow.program_image_uri}>
+                <div className="inner-content flex flex-col gap-4 p-4 backdrop-blur-xs dark-alpha-3">
+                    <div className="show-info flex items-end gap-4">
+                        {/* <div className="show-art-wrapper">
+                            <Image image={finalShow.program_image_uri} className="size-20 rounded-2xl overflow-hidden" />
+                        </div> */}
+                        <div className="show-text-wrapper flex flex-col text gap-2">
+                            <div className="program-name text-2xl font-semibold">{ finalShow.program_name }</div>
+                            <div className="tagline ps-2 font-semibold">{ finalShow.tagline }</div>
+                        </div>
+                    </div>
+                    <HostsContainer hosts={finalShow.hosts} />
                 </div>
-            </div>
-            <HostsContainer hosts={finalShow.hosts} />
+            </Image>
         </div>
     );
 }
@@ -65,9 +69,9 @@ function CurrentShowMini({ size = 'size-12', titleClass = '', subtitleClass = 't
 function HostsContainer({ hosts }) {
     return  <div className="hosts-container flex flex-col gap-2">
                 <div className="title text-xl font-semibold">{ hosts.length > 1 ? 'Hosts' : 'Host' }</div>
-                <div className="flex flex-col gap-3">{ 
+                <div className="flex flex-col gap-3 ps-2">{ 
                     hosts.map(id => 
-                    <HostWithName imageSize='size-14' textSize='text-lg' id={id} />
+                        <HostWithName key={'host-' + id} imageSize='size-14' textSize='text-lg' id={id} />
                 )}</div>
             </div>
 }
