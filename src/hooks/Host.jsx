@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import useFetch from "./Fetch";
 
-export function useHost() {
+/**
+ * 
+ * @returns { [any, (id) => void] }
+ */
+export default function useHost() {
     const [ state, setState ] = useState();
     const url = 'https://api.kexp.org/v2/hosts/';
     const params = { limit: 1 };

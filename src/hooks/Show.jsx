@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import useFetch from "./Fetch";
 
+/**
+ * 
+ * @returns {[any, (id) => void]}
+ */
 export function useShow() {
     const [ state, setState ] = useState();
     const url = 'https://api.kexp.org/v2/shows/';
