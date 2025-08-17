@@ -26,7 +26,7 @@ export function Show({ show, id = null, className = '' }) {
             <Image image={finalShow.program_image_uri}>
                 <div className="inner-content flex flex-col gap-4 p-4 backdrop-blur-xs dark-alpha-3">
                     <div className="show-info flex items-end gap-4">
-                        <div className="show-text-wrapper flex flex-col text gap-2">
+                        <div className="show-text-wrapper flex flex-col flex-grow text gap-2">
                             <div className="program-name-icon-wrapper text-2xl font-semibold flex">
                                 <div className="program-name flex-grow">
                                     { finalShow.program_name }
