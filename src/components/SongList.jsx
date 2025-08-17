@@ -2,8 +2,8 @@ import { useNavigate } from "react-router";
 import { Image } from "./AlbumArt"
 
 export function SongList({ className, songs }) {
-    return  (<div className={"song-list flex gap-4 flex-col p-4 " + className}> {
-                songs.map(song => <SongCard key={song.id} song={song} />)
+    return  (<div className={"song-list flex gap-4 flex-col flex-grow " + className}> {
+                songs.map((song, i) => <SongCard key={`${song.id}-${i}`} song={song} />)
             }</div>);
 }
 
