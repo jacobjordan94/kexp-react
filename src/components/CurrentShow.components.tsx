@@ -3,8 +3,10 @@ import { Image } from "./AlbumArt";
 import PictureWithInfo from "./PictureWithInfo";
 import { GlobalContext } from "../main";
 import { useShow } from "../hooks/Show";
+import useHost from "../hooks/Host";
 
 export function Show({ show, id = null, className = '' }) {
+    
     const [ finalShow, setFinalShow ] = useState();
     const [ showFromId, getShow ] = useShow();
 
@@ -19,7 +21,7 @@ export function Show({ show, id = null, className = '' }) {
     }, [ id ]);
 
     return ( finalShow &&
-        <div className={"current-show p-2 " + className}>
+        <div className={"current-show p-2 flex flex-col gap-4" + className}>
             <div className="show-info flex items-end gap-4">
                 {/* <div className="show-art-wrapper">
                     <Image image={finalShow.program_image_uri} className="size-20 rounded-2xl overflow-hidden" />
@@ -29,9 +31,7 @@ export function Show({ show, id = null, className = '' }) {
                     <div className="tagline">{ finalShow.tagline }</div>
                 </div>
             </div>
-            <div className="hosts">
-    
-            </div>
+            <HostsContainer hosts={finalShow.hosts} />
         </div>
     );
 }
@@ -60,6 +60,30 @@ export function ShowMini({ show, size = 'size-12', titleClass = '', subtitleClas
 function CurrentShowMini({ size = 'size-12', titleClass = '', subtitleClass = 'text-xs' }) {
     const { globalState: { currentShow } } = useContext(GlobalContext);
     return currentShow && <ShowMini show={currentShow} size={size} titleClass={titleClass} subtitleClass={subtitleClass} />
+}
+
+function HostsContainer({ hosts }) {
+    return  <div className="hosts-container flex flex-col gap-2">
+                <div className="title text-xl font-semibold">{ hosts.length > 1 ? 'Hosts' : 'Host' }</div>
+                <div className="flex flex-col gap-3">{ 
+                    hosts.map(id => 
+                    <HostWithName imageSize='size-14' textSize='text-lg' id={id} />
+                )}</div>
+            </div>
+}
+
+function HostWithName({ id, imageSize, textSize }) {
+    const [ host, getHost ] = useHost();
+    useEffect(() => {
+        if(!id) return;
+        getHost(id);
+    }, [ id ]);
+
+    return host &&
+        <div className="host-with-name flex items-center gap-4">
+            <HostImage image={host.thumbnail_uri} size={imageSize} />
+            <span className={'font-semibold ' + textSize}>{ host.name }</span>
+        </div>
 }
 
 function HostImage({ size = 'size-12' , image }) {
