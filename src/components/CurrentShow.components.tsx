@@ -4,6 +4,7 @@ import PictureWithInfo from "./PictureWithInfo";
 import { GlobalContext } from "../main";
 import { useShow } from "../hooks/Show";
 import useHost from "../hooks/Host";
+import { RadioIcon } from "@heroicons/react/24/solid";
 
 export function Show({ show, id = null, className = '' }) {
     
@@ -25,11 +26,15 @@ export function Show({ show, id = null, className = '' }) {
             <Image image={finalShow.program_image_uri}>
                 <div className="inner-content flex flex-col gap-4 p-4 backdrop-blur-xs dark-alpha-3">
                     <div className="show-info flex items-end gap-4">
-                        {/* <div className="show-art-wrapper">
-                            <Image image={finalShow.program_image_uri} className="size-20 rounded-2xl overflow-hidden" />
-                        </div> */}
                         <div className="show-text-wrapper flex flex-col text gap-2">
-                            <div className="program-name text-2xl font-semibold">{ finalShow.program_name }</div>
+                            <div className="program-name-icon-wrapper text-2xl font-semibold flex">
+                                <div className="program-name flex-grow">
+                                    { finalShow.program_name }
+                                </div>
+                                <div className="icon-wrapper flex items-center">
+                                    <RadioIcon className="size-6" />
+                                </div>
+                            </div>
                             <div className="tagline ps-2 font-semibold">{ finalShow.tagline }</div>
                         </div>
                     </div>
