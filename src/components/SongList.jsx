@@ -17,14 +17,16 @@ export function SongCard({ song }) {
         <div 
             className="song-card p-2 backdrop-blur-2xl
                      rounded-lg transparent-border-dark 
-                     border-4 cursor-pointer flex gap-3 sm:flex-col sm:h-full"
+                     border-4 cursor-pointer flex gap-3 sm:flex-col sm:h-full sm:p-0 overflow-hidden sm:gap-0"
             onClick={() => navigate('/song/' + song.id)}
         >
-            <Image image={song.image_uri} className="size-16 rounded-md overflow-hidden sm:w-full sm:h-48" />
-            <div className="information-wrap flex flex-col">
-                <div className="artist font-semibold text-lg">{ song.artist }</div>
-                <div className="hidden sm:block album" >{ song.album  }</div>
-                <div className="song text-sm"  >{ song.song   }</div>
+            <Image image={song.image_uri} className="size-16 rounded-md sm:rounded-none overflow-hidden sm:w-full sm:h-48">
+                <div className="artist font-semibold text-lg hidden sm:flex h-full dark-alpha-3 items-end p-2">{ song.artist }</div>
+            </Image>
+            <div className="information-wrap flex flex-col sm:p-4">
+                <div className="artist font-semibold text-lg sm:hidden">{ song.artist }</div>
+                <div className="hidden sm:block album sm:font-semibold">{ song.album  }</div>
+                <div className="song text-sm sm:font-semibold">{ song.song   }</div>
             </div>
         </div>
     );
