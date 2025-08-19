@@ -4,8 +4,9 @@ import { Image } from "./AlbumArt"
 export function SongList({ className, songs }) {
     return  (<div className={"song-list flex gap-4 flex-col sm:flex-row sm:flex-wrap " + className}> {
                 songs.map((song, i) => 
-                    <div className="sm:flex-1/3 lg:flex-1/4 xl:flex-1/5 4xl:flex-1/7">
-                        <SongCard key={`${song.id}-${i}`} song={song} /></div>
+                    <div key={`${song.id}-${i}`} className="sm:flex-1/3 lg:flex-1/4 xl:flex-1/5 4xl:flex-1/7">
+                        <SongCard song={song} />
+                    </div>
                     )
             }</div>);
 }
