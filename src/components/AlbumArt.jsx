@@ -33,12 +33,14 @@ export function Image({
         setImage();
     }, [ image ])
 
+    const LoadingComponent = () => <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center"><Spinner /></div>;
+
     return (
         <div 
             style={{ backgroundImage: src ? `url("${src}")` : '' }} 
-            className={"bg-center bg-no-repeat bg-cover " + className}
+            className={"bg-center bg-no-repeat bg-cover " + className + " " + (loading ? ' relative animate-pulse' : '')}
         >
-            { !loading ? children : <Spinner /> }
+            { !loading ? children : <LoadingComponent /> }
         </div>
 
     );
