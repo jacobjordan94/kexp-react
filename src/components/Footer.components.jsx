@@ -33,7 +33,9 @@ export default function Footer({}) {
                             <div className="sm:hidden">
                                 <CurrentShowMini currentShow={currentShow} /> 
                             </div> :
-                            <NowPlaying currentSong={currentSong} /> }
+                            <div className="md:hidden">
+                                <NowPlaying currentSong={currentSong} /> 
+                            </div> }
                         <Navigation currentPage={currentPath} onNavigate={onNavigate} />
                     </div>
                 </div>
