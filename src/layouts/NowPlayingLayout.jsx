@@ -3,13 +3,14 @@ import { GlobalContext } from "../main";
 import { Show } from "../components/CurrentShow.components";
 import { ArtistImage, Image } from "../components/AlbumArt";
 import { Controls } from "../components/Controls";
+import { Outlet } from "react-router";
 
 export default function NowPlayingLayout({ children, startClassName, endClassName }) {
     const { globalState: { currentShow, currentSong } } = useContext(GlobalContext);
     return (
         <div className="now-playing-layout flex h-full gap-4">
             <div className={"start-col overflow-y-scroll " + startClassName}>
-                { children }
+                { children || <Outlet /> }
             </div>
             <div className={"end-col " + endClassName}>
                 <NowPlayingPanel currentShow={currentShow} currentSong={currentSong} />

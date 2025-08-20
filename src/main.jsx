@@ -9,6 +9,7 @@ import useGlobals from './hooks/Globals'
 import Song from './pages/Song'
 import SongListLayout from './layouts/SongListLayout'
 import { SongList } from './components/SongList'
+import NowPlayingLayout from './layouts/NowPlayingLayout'
 
 export const GlobalContext = createContext();
 
@@ -34,7 +35,9 @@ function App() {
                     <Route path="/recents" element={<SongList songs={globalState.recents} />} />
                     <Route path="/likes"   element={<SongList songs={globalState.likedSongs.songs}/>} />
                   </Route>
-                  <Route path="/song/:id" element={<Song />}/>
+                  <Route element={<NowPlayingLayout startClassName="flex-2/3 xl:flex-3/4" endClassName="hidden md:block flex-1/3 xl:flex-1/4" />}>
+                    <Route path="/song/:id" element={<Song />}/>
+                  </Route>
               </Routes>
             </section>
             <Footer />
