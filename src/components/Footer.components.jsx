@@ -25,9 +25,9 @@ export default function Footer({}) {
     }, [ loc ]);
 
     return ( currentSong &&
-        <footer className=''>
+        <footer style={{'--tw-shadow-color': 'black'}} className='shadow-2xl'>
             <div className="footer-wrap">
-                <div style={{'--tw-shadow-color': 'black'}} className="relative overflow-hidden backdrop-blur-2xl px-4 pt-4">
+                <div className="relative overflow-hidden backdrop-blur-2xl px-4 pt-4">
                     <div className="controls">
                         { (currentPath === '/') ? 
                             <div className="sm:hidden">

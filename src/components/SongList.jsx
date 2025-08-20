@@ -2,9 +2,9 @@ import { useNavigate } from "react-router";
 import { Image } from "./AlbumArt"
 
 export function SongList({ className, songs }) {
-    return  (<div className={"song-list flex gap-4 flex-col sm:flex-row sm:flex-wrap " + className}> {
+    return  (<div className={"song-list flex gap-4 sm:gap-0 flex-col sm:flex-row sm:flex-wrap " + className}> {
                 songs.map((song, i) => 
-                    <div key={`${song.id}-${i}`} className="sm:flex-1/3 lg:flex-1/4 xl:flex-1/5 4xl:flex-1/7">
+                    <div key={`${song.id}-${i}`} className="sm:flex-1/2 lg:flex-1/3 xl:flex-1/4 4xl:flex-1/6 sm:p-5.5">
                         <SongCard song={song} />
                     </div>
                     )
@@ -16,9 +16,12 @@ export function SongCard({ song }) {
     const navigate = useNavigate();
     return (
         <div 
+            style={{'--tw-shadow-color': 'rgba(0, 0, 0, 0.5)'}}
             className="song-card p-2 backdrop-blur-2xl
                      rounded-lg transparent-border-dark 
-                     border-4 cursor-pointer flex gap-3 sm:flex-col sm:h-full sm:p-0 overflow-hidden sm:gap-0"
+                      cursor-pointer flex gap-3 
+                     sm:flex-col sm:h-full sm:p-0 overflow-hidden 
+                     sm:gap-0 sm:shadow-xl"
             onClick={() => navigate('/song/' + song.id)}
         >
             <Image image={song.image_uri} className="size-16 rounded-md sm:rounded-none overflow-hidden sm:w-full sm:h-48">
