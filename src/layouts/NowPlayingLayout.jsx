@@ -4,6 +4,7 @@ import { Show } from "../components/CurrentShow.components";
 import { ArtistImage, Image } from "../components/AlbumArt";
 import { Controls } from "../components/Controls";
 import { Outlet } from "react-router";
+import { FullArtistInfo } from "../components/ArtistInformation.components";
 
 export default function NowPlayingLayout({ children, startClassName, endClassName }) {
     const { globalState: { currentShow, currentSong } } = useContext(GlobalContext);
@@ -47,8 +48,9 @@ function ControlsBox ({ song, className }) {
                         <div className="artist text-2xl font-semibold h-full w-full flex items-end p-4 bg-linear-to-b from-[rgba(0,0,0,0)] to-[rgba(0,0,0,1)]">{ song.artist }</div>
                     </ArtistImage>
                     <div className="other-info px-4 py-2">
-                        <div className="album text-lg font-semibold">{ song.album }</div>
-                        <div className="song  text-lg font-semibold">{  song.song }</div>
+                        <FullArtistInfo song={song} sections={['album', 'song']}
+                                        iconClass={"size-5"} textClass={"font-semibold text-lg"} 
+                        />
                     </div>
                     <div className="buttons-container mt-4">
                         <Controls currentSong={song} className="flex flex-row justify-evenly" />
