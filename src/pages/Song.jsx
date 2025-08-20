@@ -18,7 +18,7 @@ function Song() {
 
     return (
         song && 
-        <div className="page page-song">
+        <div className="page page-song h-full w-full">
             <SongBody song={song} />
         </div>
     );
