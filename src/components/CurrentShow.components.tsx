@@ -24,8 +24,8 @@ export function Show({ show, id = null, className = '' }) {
 
     return ( finalShow &&
         <div className={"current-show rounded-2xl overflow-hidden border-2 transparent-border-dark " + className}>
-            <Image image={finalShow.program_image_uri}>
-                <div className="inner-content flex flex-col gap-4 p-4 backdrop-blur-xs dark-alpha-3">
+            <Image image={finalShow.program_image_uri} className="h-full">
+                <div className="inner-content flex flex-col gap-4 p-4 backdrop-blur-xs dark-alpha-3 h-full justify-between">
                     <div className="show-info flex items-end gap-4">
                         <div className="show-text-wrapper flex flex-col flex-grow text gap-2">
                             <div className="program-name-icon-wrapper text-2xl font-semibold flex">

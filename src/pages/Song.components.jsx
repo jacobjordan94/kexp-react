@@ -8,13 +8,13 @@ import { Show } from "../components/CurrentShow.components";
 export function SongBody({ song }) {
     return (
         <div className="song-body p-4 lg:w-full lg:h-full">
-            <div className="top flex gap-4 lg:flex-row lg:h-full">
+            <div className="top flex flex-col gap-4 lg:flex-row lg:h-full">
                 <div className="flex flex-col lg:flex-1/2 row gap-4">
                     <div className="lg:flex-1/2">
                         <ArtistCard song={song} />
                     </div>
                     <div className="lg:flex-1/2">
-                        <Show id={song.show} />
+                        <Show id={song.show} className="lg:h-full" />
                     </div>
                 </div>
                 <div className="flex flex-col lg:flex-1/2 gap-4">
@@ -22,7 +22,7 @@ export function SongBody({ song }) {
                         <DetailedSongInformation song={song} />
                     </div>
                     <div className="lg:flex-1/2">
-                        <CommentBox comment={song.comment} className="backdrop-blur-xl lg:flex-grow" />
+                        <CommentBox comment={song.comment} className="backdrop-blur-xl lg:h-full" />
                     </div>
                 </div>
             </div>
