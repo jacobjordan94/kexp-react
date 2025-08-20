@@ -24,8 +24,8 @@ export function SongCard({ song }) {
                      sm:gap-0 sm:shadow-xl"
             onClick={() => navigate('/song/' + song.id)}
         >
-            <Image image={song.image_uri} className="size-16 rounded-md sm:rounded-none overflow-hidden sm:w-full sm:h-48">
-                <div className="artist font-semibold text-lg hidden sm:flex h-full dark-alpha-3 items-end p-2">{ song.artist }</div>
+            <Image image={song.image_uri} className="size-16 rounded-md sm:rounded-none overflow-hidden sm:w-full sm:flex-grow min-h-48">
+                <div className="artist font-semibold text-lg hidden sm:flex h-full items-end p-2 bg-radial from-[rgba(0,0,0,0)] to-[rgba(0,0,0,0.75)] to-100%">{ song.artist }</div>
             </Image>
             <div className="information-wrap flex flex-col sm:p-4">
                 <div className="artist font-semibold text-lg sm:hidden">{ song.artist }</div>
