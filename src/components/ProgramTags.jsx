@@ -7,7 +7,7 @@ export function ProgramTags({ programTags }) {
         setTags(programTags.split(','));
     }, [ programTags ])
 
-    return tags && tags.map(tag => <ProgramTag tag={tag} />)
+    return tags && tags.map((tag, i) => <ProgramTag key={i} tag={tag} />)
 }
 
 export function ProgramTag({ tag }) {
