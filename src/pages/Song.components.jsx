@@ -1,5 +1,5 @@
 import { CloudIcon, MusicalNoteIcon, UserIcon } from "@heroicons/react/24/solid";
-import { ArtistImage } from "../components/AlbumArt";
+import AlbumArt, { ArtistImage } from "../components/AlbumArt";
 import BaseLikeButton from "../components/BaseLikeButton";
 import CommentBox from "../components/CommentBox";
 import { Show } from "../components/CurrentShow.components";
@@ -20,7 +20,7 @@ export function SongBody({ song }) {
 
 function ArtistCard({ song }) {
     return (
-        <ArtistImage artistName={song.artist} className="size-full w-full h-64 flex rounded-2xl overflow-hidden bg-top">
+        <ArtistImage artistName={song.artist} className="size-full w-full h-96 flex rounded-2xl overflow-hidden bg-top">
             <div className="flex-grow flex items-end dark-alpha-3">
                 <ArtistName name={song.artist} />
             </div>
@@ -57,7 +57,8 @@ export function DetailedSongInformation({ song }) {
                              </IconWrap>
 
     return ( song &&
-        <div className="detailed-song-information backdrop-blur-xl rounded-2xl p-2 border-4 transparent-border-dark">
+        <div className="detailed-song-information backdrop-blur-xl rounded-2xl p-2 border-4 transparent-border-dark lg:flex lg:flex-col lg:gap-4">
+            <AlbumArt image={song.image_uri} className="album-wrap hidden lg:block flex-grow rounded-2xl" />                
             <div className="flex gap-6 justify-between">
                 <div className="text-wrapper">
                     { song.album && 
