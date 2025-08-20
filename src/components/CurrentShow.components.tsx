@@ -5,6 +5,7 @@ import { GlobalContext } from "../main";
 import { useShow } from "../hooks/Show";
 import { RadioIcon } from "@heroicons/react/24/solid";
 import { HostImage, HostsContainer } from "./Host.components";
+import { ProgramTags } from "./ProgramTags";
 
 export function Show({ show, id = null, className = '' }) {
     
@@ -37,6 +38,9 @@ export function Show({ show, id = null, className = '' }) {
                             </div>
                             <div className="tagline ps-2 font-semibold">{ finalShow.tagline }</div>
                         </div>
+                    </div>
+                    <div className="program-tags flex justify-evenly">
+                        <ProgramTags programTags={finalShow.program_tags}  />
                     </div>
                     <HostsContainer hosts={finalShow.hosts} />
                 </div>
