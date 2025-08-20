@@ -12,7 +12,7 @@ export function HomeInformation({ currentSong }) {
             <div className="w-full flex flex-col flex-grow lg:flex-row lg:flex-grow">
                 <Image image={currentSong.image_uri} className="album-art-wrapper rounded-2xl border-4 transparent-border-light overflow-hidden flex-grow h-full lg:flex lg:items-center lg:justify-center">
                     <div className="hidden lg:inline">
-                        <PlayPauseButton />
+                        <PlayPauseButton className="size-16" />
                     </div>
                 </Image>
                 <div className="flex flex-col flex-grow justify-between sm:flex-row sm:grow-0 pt-4 lg:pt-0 lg:grow-0 lg:px-8 lg:flex-col lg:justify-end lg:min-w-lg lg:gap-6">
