@@ -25,15 +25,15 @@ export default function Footer({}) {
     }, [ loc ]);
 
     return ( currentSong &&
-        <footer className='default-shadow shadow-2xl'>
+        <footer style={{ boxShadow: 'rgba(0,0,0,0.5) 0 -4px 10px 0' }}>
             <div className="footer-wrap">
-                <div className="relative overflow-hidden backdrop-blur-2xl px-4 pt-4">
+                <div className="relative overflow-hidden backdrop-blur-2xl px-4">
                     <div className="controls">
                         { (currentPath === '/') ? 
-                            <div className="sm:hidden">
+                            <div className="pt-4 sm:hidden">
                                 <CurrentShowMini currentShow={currentShow} /> 
                             </div> :
-                            <div className="md:hidden">
+                            <div className="pt-4 md:hidden">
                                 <NowPlaying currentSong={currentSong} /> 
                             </div> }
                         <Navigation currentPage={currentPath} onNavigate={onNavigate} />
