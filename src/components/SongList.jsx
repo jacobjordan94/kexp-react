@@ -31,8 +31,8 @@ export function SongCard({ song }) {
             </Image>
             <div className="information-wrap sm:p-4">
                 <FullArtistInfo song={song} sections={['artist', 'album', 'song']}
-                                iconClass="size-6" textClass="font-semibold text-lg" 
-                                artistIconClass="sm:hidden" artistTextClass="sm:hidden"
+                                iconClass="size-6" textClass="font-semibold text-md" 
+                                artistIconClass="sm:hidden" artistTextClass="sm:hidden text-lg"
                                 albumIconClass="hidden sm:block" albumTextClass="hidden sm:block"
                 />
             </div>
