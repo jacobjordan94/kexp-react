@@ -5,9 +5,9 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../main";
 import { useNavigate } from "react-router";
 
-const HomeButton = ({ className, onClick, children, disabled = false }) => 
+const HomeButton = ({ className, onClick, children, disabled = false, shadow = false }) => 
     <div className="home-button-wrap">
-        <div className="rounded-full overflow-hidden backdrop-blur-2xl inline-flex transparent-border-dark border-2">
+        <div className={"rounded-full overflow-hidden backdrop-blur-2xl inline-flex transparent-border-dark border-2 " + (shadow ? 'default-shadow shadow-xl border-none' : '')}>
             <button disabled={disabled} className={'home-button reset-padding disabled:opacity-75 disabled:blur-2 ' + className} 
                     onClick={onClick}
             >
@@ -18,7 +18,7 @@ const HomeButton = ({ className, onClick, children, disabled = false }) =>
         </div>
     </div>
 
-function InformationButton({ currentSong })  {
+function InformationButton({ currentSong, shadow = false })  {
     const navigate = useNavigate();
 
     return ( currentSong &&
@@ -26,16 +26,17 @@ function InformationButton({ currentSong })  {
             disabled={ currentSong.play_type !== 'trackplay' }
             className={'information size-12'} 
             onClick={() => navigate('/song/' + currentSong.id)}
+            shadow={shadow}
         >
             <InformationCircleIcon /> :
         </HomeButton>
     );
 }
 
-function PlayPauseButton({ onClick }) {
+function PlayPauseButton({ onClick, shadow = false }) {
     const [ audioIsPlaying, setAudioIsPlaying ] = useState(false);
     return (
-        <HomeButton className={'play-pause size-16'} onClick={() => setAudioIsPlaying(!audioIsPlaying)}>
+        <HomeButton className={'play-pause size-16'} onClick={() => setAudioIsPlaying(!audioIsPlaying)} shadow="false">
         {
             audioIsPlaying ? <PauseIcon /> : <PlayIcon />
         }
@@ -43,7 +44,7 @@ function PlayPauseButton({ onClick }) {
     );
 }
 
-function LikeButton({ currentSong }) {
+function LikeButton({ currentSong, shadow = false }) {
     const { globalState: { likedSongs: { songs, dispatch } } } = useContext(GlobalContext);
     const [ liked, setLiked ] = useState(false); 
     const alreadyLiked = () => songs.findIndex(song => song.id === currentSong.id) > -1;
@@ -68,6 +69,7 @@ function LikeButton({ currentSong }) {
             className={'like size-12'} 
             onClick={toggleLike}
             disabled={ currentSong.play_type !== 'trackplay' }
+            shadow={shadow}
         >
         {
             liked ?
@@ -77,14 +79,14 @@ function LikeButton({ currentSong }) {
     );
 }
 
-export function Controls({ currentSong, className = '', offset = true }) {
+export function Controls({ currentSong, className = '', offset = true, shadow = false }) {
     return (
         <div className={"controls-wrapper " + className}>
-            <InformationButton currentSong={currentSong} />
+            <InformationButton shadow={shadow} currentSong={currentSong} />
             <div className={offset ? 'mt-4' : ''}>
-                <PlayPauseButton />
+                <PlayPauseButton shadow={shadow} />
             </div>
-            <LikeButton currentSong={currentSong} />
+            <LikeButton shadow={shadow} currentSong={currentSong} />
         </div>
     );
 }
