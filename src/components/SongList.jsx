@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { Image } from "./AlbumArt"
+import { ArtistInformation, FullArtistInfo } from "./ArtistInformation.components";
 
 export function SongList({ className, songs }) {
     return  (<div className={"song-list flex gap-4 sm:gap-0 flex-col sm:flex-row sm:flex-wrap p-2 sm:p-0 " + className}> {
@@ -25,12 +26,16 @@ export function SongCard({ song }) {
             onClick={() => navigate('/song/' + song.id)}
         >
             <Image image={song.image_uri} className="min-w-16 rounded-md sm:rounded-none overflow-hidden sm:w-full sm:flex-grow sm:min-h-48">
-                <div className="artist font-semibold text-lg hidden sm:flex h-full items-end p-2 bg-radial from-[rgba(0,0,0,0)] to-[rgba(0,0,0,0.75)] to-100%">{ song.artist }</div>
+                <div className="artist font-semibold text-lg hidden sm:flex h-full items-end p-2 bg-radial from-[rgba(0,0,0,0)] from-50% to-[rgba(0,0,0,0.5)] to-90%">
+                        <ArtistInformation iconClass={'size-6'} artistName={song.artist} />
+                </div>
             </Image>
-            <div className="information-wrap flex flex-col sm:p-4 min-h-16">
-                <div className="artist font-semibold text-lg sm:hidden">{ song.artist }</div>
-                <div className="hidden sm:block album sm:font-semibold">{ song.album  }</div>
-                <div className="song text-sm sm:font-semibold">{ song.song   }</div>
+            <div className="information-wrap sm:p-4">
+                <FullArtistInfo song={song} sections={['artist', 'album', 'song']}
+                                iconClass="size-6" textClass="font-semibold text-lg" 
+                                artistIconClass="sm:hidden" artistTextClass="sm:hidden"
+                                albumIconClass="hidden sm:block" albumTextClass="hidden sm:block"
+                />
             </div>
         </div>
     );

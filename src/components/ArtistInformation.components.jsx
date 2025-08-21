@@ -6,9 +6,9 @@ export const AlbumIcon = ({ className }) => <CodeBracketIcon className={classNam
 export const ArtistIcon = ({ className }) => <UserIcon className={className} />
 export const SongIcon = ({ className }) => <MusicalNoteIcon className={className} />
 
-export function IconText({Icon, text, iconClass, textClass}) {
+export function IconText({Icon, text, iconClass, textClass, className}) {
     return ( text && 
-        <div className={"icon-text flex gap-2.5 items-center"}>
+        <div className={"icon-text flex gap-2.5 items-center " + className}>
             <div className={"icon " + iconClass}>
                 <Icon />
             </div>
@@ -17,16 +17,16 @@ export function IconText({Icon, text, iconClass, textClass}) {
     );
 }
 
-export function ArtistInformation({ artistName, iconClass, textClass }) {
-    return <IconText Icon={() => <ArtistIcon className={iconClass} />} text={artistName} iconClass={iconClass} textClass={textClass} />
+export function ArtistInformation({ artistName, iconClass, textClass, className }) {
+    return <IconText className={className} Icon={() => <ArtistIcon className={iconClass} />} text={artistName} iconClass={iconClass} textClass={textClass} />
 }
 
-export function AlbumInformation({ albumName, iconClass, textClass }) {
-    return <IconText Icon={() => <AlbumIcon className={iconClass} />} text={albumName} iconClass={iconClass} textClass={textClass} />
+export function AlbumInformation({ albumName, iconClass, textClass, className }) {
+    return <IconText className={className} Icon={() => <AlbumIcon className={iconClass} />} text={albumName} iconClass={iconClass} textClass={textClass} />
 }
 
-export function SongInformation({ songName, iconClass, textClass }) {
-    return <IconText Icon={() => <SongIcon className={iconClass}/>} text={songName} iconClass={iconClass} textClass={textClass} />
+export function SongInformation({ songName, iconClass, textClass, className }) {
+    return <IconText className={className} Icon={() => <SongIcon className={iconClass}/>} text={songName} iconClass={iconClass} textClass={textClass} />
 }
 
 export function FullArtistInfo({ song, sections = ['artist', 'song', 'album'], artistIconClass, artistTextClass, songIconClass, songTextClass, albumIconClass, albumTextClass, iconClass, textClass, children, className }) {
