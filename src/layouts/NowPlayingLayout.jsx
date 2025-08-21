@@ -46,7 +46,7 @@ function ControlsBox ({ song, className }) {
                 <div className="info dark-alpha-2 p-4 flex flex-col h-full justify-end backdrop-blur-xs overflow-hidden">
                     <ArtistImage artistName={song.artist} className="flex-grow rounded-2xl bg-top overflow-hidden">
                         <div className="artist text-2xl font-semibold h-full w-full flex items-end p-4 bg-linear-to-b from-[rgba(0,0,0,0)] to-[rgba(0,0,0,1)]">
-                            <ArtistInformation artistName={song.artist} iconClass="" textClass="text-2xl" />
+                            <ArtistInformation artistName={song.artist || (song.play_Type === 'airbreak' ? 'KEXP' : '')} textClass="text-2xl" />
                         </div>
                     </ArtistImage>
                     <div className="other-info px-4 py-2">
