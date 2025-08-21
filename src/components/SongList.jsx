@@ -17,12 +17,11 @@ export function SongCard({ song }) {
     const navigate = useNavigate();
     return (
         <div 
-            style={{'--tw-shadow-color': 'rgba(0, 0, 0, 0.5)'}}
             className="song-card p-2 backdrop-blur-2xl
                      rounded-lg transparent-border-dark 
                       cursor-pointer flex gap-3 
                      sm:flex-col sm:h-full sm:p-0 overflow-hidden 
-                     sm:gap-0 shadow-xl"
+                     sm:gap-0 default-shadow shadow-xl"
             onClick={() => navigate('/song/' + song.id)}
         >
             <Image image={song.image_uri} className="min-w-16 rounded-md sm:rounded-none overflow-hidden sm:w-full sm:flex-grow sm:min-h-48">

@@ -25,7 +25,7 @@ export default function Footer({}) {
     }, [ loc ]);
 
     return ( currentSong &&
-        <footer style={{'--tw-shadow-color': 'black'}} className='shadow-2xl'>
+        <footer className='default-shadow shadow-2xl'>
             <div className="footer-wrap">
                 <div className="relative overflow-hidden backdrop-blur-2xl px-4 pt-4">
                     <div className="controls">

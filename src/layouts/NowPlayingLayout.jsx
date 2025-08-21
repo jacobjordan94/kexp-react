@@ -23,18 +23,17 @@ export default function NowPlayingLayout({ children, startClassName, endClassNam
 function NowPlayingPanel({ currentSong, currentShow }) {
     return (
         <div className="flex flex-col gap-4 p-4 ps-0 h-full">
-            <div className="shadow-[rgba(0,0,0,0.5)\ 0px\ 4px\ 6px] shadow-xl side-title dark-alpha-1 text-2xl backdrop-blur-2xl p-4 rounded-2xl ">
+            <div className="default-shadow text-shadow-sm shadow-xl side-title dark-alpha-1 text-2xl backdrop-blur-2xl p-4 rounded-2xl ">
                 Now Playing
             </div>
             <div className="side-controls-container flex flex-col gap-4 flex-grow">
-                <div className="shadow-[rgba(0,0,0,0.5)] shadow-xl overflow-hidden rounded-2xl">
+                <div className="default-shadow shadow-xl overflow-hidden rounded-2xl">
                     <Show show={currentShow}/>
                 </div>
-                <div className="shadow-[rgba(0,0,0,0.5)] shadow-xl overflow-hidden rounded-2xl flex-grow">
+                <div className="default-shadow shadow-xl overflow-hidden rounded-2xl flex-grow">
                     <ControlsBox song={currentSong} className={'h-full'} />
                 </div>
             </div>
-    
         </div>
     );
 }

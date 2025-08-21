@@ -137,3 +137,8 @@ button:focus-visible {
 .transparent-border-light {
   border-color: rgba(255, 255, 255, 0.1);
 }
+
+.default-shadow {
+  --tw-shadow-color: rgba(0, 0, 0, 0.5);
+  --tw-text-shadow-color: rgba(0, 0 , 0.5);
+}

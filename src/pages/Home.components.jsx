@@ -9,7 +9,7 @@ import { FullArtistInfoWithLikeButton } from "../components/ArtistInformation.co
 
 export function HomeInformation({ currentSong }) {
     return ( currentSong &&
-        <div className="home-information-wrapper w-full rounded-2xl backdrop-blur-2xl p-4 flex gap-4 border-4 transparent-border-dark sm:w-full h-full lg:flex-col lg:justify-between lg:pe-0">
+        <div className="home-information-wrapper w-full rounded-2xl backdrop-blur-2xl p-4 flex gap-4 sm:w-full h-full lg:flex-col lg:justify-between lg:pe-0 default-shadow shadow-xl">
             <div className="w-full flex flex-col flex-grow lg:flex-row lg:flex-grow">
                 <Image image={currentSong.image_uri} className="album-art-wrapper rounded-2xl border-4 transparent-border-light overflow-hidden flex-grow h-full lg:flex lg:items-center lg:justify-center">
                     <div className="hidden lg:inline">
