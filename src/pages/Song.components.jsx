@@ -45,7 +45,9 @@ export function DetailedSongInformation({ song }) {
     return ( song &&
         <div className="detailed-song-information backdrop-blur-xl rounded-2xl p-2 border-4 transparent-border-dark lg:flex lg:flex-col lg:gap-4 lg:h-full">
             <AlbumArt image={song.image_uri} className="album-wrap hidden lg:block lg:h-full rounded-2xl" />                
-            <FullArtistInfoWithLikeButton likeButtonSize="size-12" song={song} sections={['album', 'song']} iconClass={'size-6'} textClass={'text-lg font-semibold'} />
+            <FullArtistInfoWithLikeButton likeButtonSize="size-12" song={song}
+                                          sections={['album', 'song']} iconClass={'size-6'} 
+                                          textClass={'text-lg font-semibold'} />
         </div>
     );
 }

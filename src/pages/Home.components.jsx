@@ -5,6 +5,7 @@ import BaseLikeButton from "../components/BaseLikeButton";
 import CommentBox from "../components/CommentBox";
 import { Controls } from "../components/Controls";
 import PlayPauseButton from "../components/PlayPauseButton";
+import { FullArtistInfoWithLikeButton } from "../components/ArtistInformation.components";
 
 export function HomeInformation({ currentSong }) {
     return ( currentSong &&
@@ -20,12 +21,10 @@ export function HomeInformation({ currentSong }) {
                         <ArtistImage artistName={currentSong.artist} className="h-full rounded-2xl border-4 transparent-border-light" />
                         <CommentBox comment={currentSong.comment} className="block max-w-lg max-h-[256px] overflow-y-scroll" />
                     </div>
-                    <div className="song-information-wrapper contents lg:flex lg:flex-row lg:justify-between items-center">
-                        <SongInformation currentSong={currentSong} />
-                        <div className="like-wrapper hidden lg:block hover:animate-pulse">
-                            <BaseLikeButton className=" size-12" currentSong={currentSong} />
-                        </div>
-                    </div>
+                    <FullArtistInfoWithLikeButton song={currentSong} sections={[ 'artist', 'song' ]} 
+                                                    artistIconClass={'size-8'} artistTextClass={'font-semibold text-2xl'}
+                                                    songIconClass={'size-6'} songTextClass={'ps-2 text-xl'} likeButtonSize="size-12" likeButtonClassName="hidden lg:block"
+                    />
                     <div className="hidden lg:block">
                         <CurrentShowMini size="size-16" titleClass="text-lg max-w-2xs overflow-hidden overflow-ellipsis whitespace-nowrap" subtitleClass="text-md max-w-2xs overflow-hidden overflow-ellipsis whitespace-nowrap" />
                     </div>

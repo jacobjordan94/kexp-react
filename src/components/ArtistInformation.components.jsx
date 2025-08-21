@@ -58,7 +58,7 @@ export function FullArtistInfo({ song, sections = ['artist', 'song', 'album'], a
     );
 }
 
-export function FullArtistInfoWithLikeButton({ song, sections = ['artist', 'song', 'album'], artistIconClass, artistTextClass, songIconClass, songTextClass, albumIconClass, albumTextClass, iconClass, textClass, className, likeButtonSize = 'size-10' }) {
+export function FullArtistInfoWithLikeButton({ song, sections = ['artist', 'song', 'album'], artistIconClass, artistTextClass, songIconClass, songTextClass, albumIconClass, albumTextClass, iconClass, textClass, className, likeButtonSize = 'size-10', likeButtonClassName }) {
     return ( 
         <FullArtistInfo
             song={song} sections={sections} artistIconClass={artistIconClass} 
@@ -67,7 +67,7 @@ export function FullArtistInfoWithLikeButton({ song, sections = ['artist', 'song
             albumTextClass={albumTextClass} iconClass={iconClass} textClass={textClass}
             className={className}
         >
-            <BaseLikeButton className={"me-4 " + likeButtonSize} currentSong={song} />
+            <BaseLikeButton className={"me-4 " + likeButtonSize + " " + likeButtonClassName} currentSong={song} />
         </FullArtistInfo>
     );
 }
