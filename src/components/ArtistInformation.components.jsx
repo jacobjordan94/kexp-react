@@ -1,8 +1,9 @@
-import { UserIcon, CodeBracketIcon, MusicalNoteIcon  } from "@heroicons/react/24/solid"
+import { UserIcon, MusicalNoteIcon  } from "@heroicons/react/24/solid"
 import { useEffect, useState } from "react";
 import BaseLikeButton from "./BaseLikeButton";
+import AlbumIconComponent from '../components/AlbumIcon';
 
-export const AlbumIcon = ({ className }) => <CodeBracketIcon className={className} />
+export const AlbumIcon = ({ className }) => <AlbumIconComponent className={className} />
 export const ArtistIcon = ({ className }) => <UserIcon className={className} />
 export const SongIcon = ({ className }) => <MusicalNoteIcon className={className} />
 
