@@ -10,18 +10,18 @@ export function SongBody({ song }) {
             <div className="top flex flex-col gap-4 lg:flex-row lg:h-full">
                 <div className="flex flex-col lg:flex-1/2 row gap-4">
                     <div className="lg:flex-1/2">
-                        <ArtistCard song={song} />
+                        <ArtistCard song={song} className="default-shadow shadow-xl" />
                     </div>
                     <div className="lg:flex-1/2">
-                        <Show id={song.show} className="lg:h-full" />
+                        <Show id={song.show} className="lg:h-full default-shadow shadow-xl" />
                     </div>
                 </div>
                 <div className="flex flex-col lg:flex-1/2 gap-4">
                     <div className="lg:flex-1/2">
-                        <DetailedSongInformation song={song} />
+                        <DetailedSongInformation song={song} className="default-shadow shadow-xl" />
                     </div>
                     <div className="lg:flex-1/2">
-                        <CommentBox comment={song.comment} className="backdrop-blur-xl lg:h-full" />
+                        <CommentBox comment={song.comment} className="backdrop-blur-xl lg:h-full default-shadow shadow-xl" />
                     </div>
                 </div>
             </div>
@@ -29,9 +29,9 @@ export function SongBody({ song }) {
     )
 }
 
-function ArtistCard({ song }) {
+function ArtistCard({ song, className }) {
     return (
-        <ArtistImage artistName={song.artist} className="size-full w-full h-96 lg:h-full flex rounded-2xl overflow-hidden bg-top">
+        <ArtistImage artistName={song.artist} className={"size-full w-full h-96 lg:h-full flex rounded-2xl overflow-hidden bg-top " + className}>
             <div className="flex-grow flex items-end dark-alpha-3">
                 <div className="p-4">
                     <ArtistInformation artistName={song.artist} iconClass={'size-7'} textClass={'text-2xl font-semibold'} />
@@ -41,9 +41,9 @@ function ArtistCard({ song }) {
     );
 }
 
-export function DetailedSongInformation({ song }) {
+export function DetailedSongInformation({ song, className }) {
     return ( song &&
-        <div className="detailed-song-information backdrop-blur-xl rounded-2xl p-2 border-4 transparent-border-dark lg:flex lg:flex-col lg:gap-4 lg:h-full">
+        <div className={"detailed-song-information backdrop-blur-xl rounded-2xl p-2 border-4 transparent-border-dark lg:flex lg:flex-col lg:gap-4 lg:h-full " + className}>
             <AlbumArt image={song.image_uri} className="album-wrap hidden lg:block lg:h-full rounded-2xl" />                
             <FullArtistInfoWithLikeButton likeButtonSize="size-12" song={song}
                                           sections={['album', 'song']} iconClass={'size-6'} 
