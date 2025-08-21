@@ -21,10 +21,11 @@ export function SongCard({ song }) {
                      rounded-lg transparent-border-dark 
                       cursor-pointer flex gap-3 
                      sm:flex-col sm:h-full sm:p-0 overflow-hidden 
-                     sm:gap-0 default-shadow shadow-xl"
+                     sm:gap-0 default-shadow shadow-xl group
+                     sm:hover:scale-105 sm:mousedown:scale-100 sm:transition-[scale]"
             onClick={() => navigate('/song/' + song.id)}
         >
-            <Image image={song.image_uri} className="min-w-16 rounded-md sm:rounded-none overflow-hidden sm:w-full sm:flex-grow sm:min-h-48">
+            <Image image={song.image_uri} className="min-w-16 rounded-md sm:rounded-none overflow-hidden sm:w-full sm:flex-grow sm:min-h-48 transition-transform sm:group-hover:transform-[scale(1.05)]">
                 <div className="artist font-semibold text-lg hidden sm:flex h-full items-end p-2 bg-radial from-[rgba(0,0,0,0)] from-50% to-[rgba(0,0,0,0.5)] to-90%">
                         <ArtistInformation iconClass={'size-6'} artistName={song.artist} />
                 </div>
