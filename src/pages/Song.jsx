@@ -5,6 +5,7 @@ import useITunes from "../hooks/ITunes";
 import { SongBody } from "./Song.components";
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../main";
+import { Helmet } from "react-helmet";
 
 function Song() {
     const { id } = useParams();
@@ -17,10 +18,15 @@ function Song() {
     }, [ song ])
 
     return (
-        song && 
-        <div className="page page-song h-full w-full">
-            <SongBody song={song} />
-        </div>
+        song &&
+        <>
+            <Helmet>
+                <title>KEXP - {song.artist}, {song.song}</title>
+            </Helmet>
+            <div className="page page-song h-full w-full">
+                <SongBody song={song} />
+            </div>
+        </>
     );
 }
 

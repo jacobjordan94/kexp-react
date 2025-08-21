@@ -10,13 +10,14 @@ import Song from './pages/Song'
 import SongListLayout from './layouts/SongListLayout'
 import { SongList } from './components/SongList'
 import NowPlayingLayout from './layouts/NowPlayingLayout'
+import HelmetExport, { Helmet } from 'react-helmet'
 
 export const GlobalContext = createContext();
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <App />
-  </StrictMode>,
+  // </StrictMode>,
 )
 
 function App() {
@@ -32,8 +33,22 @@ function App() {
               <Routes>
                   <Route index element={<Home />} />
                   <Route element={ <SongListLayout /> }>
-                    <Route path="/recents" element={<SongList songs={globalState.recents} />} />
-                    <Route path="/likes"   element={<SongList songs={globalState.likedSongs.songs}/>} />
+                    <Route path="/recents" element={
+                      <>
+                        <Helmet>
+                          <title>KEXP - Recents</title>
+                        </Helmet>
+                        <SongList songs={globalState.recents} />
+                      </>
+                    } />
+                    <Route path="/likes"   element={
+                      <>
+                        <Helmet>
+                          <title>KEXP - Liked Songs</title>
+                        </Helmet>
+                        <SongList songs={globalState.likedSongs.songs}/>
+                      </>
+                    } />
                   </Route>
                   <Route element={<NowPlayingLayout startClassName="flex-2/3 xl:flex-3/4" endClassName="hidden md:block flex-1/3 xl:flex-1/4" />}>
                     <Route path="/song/:id" element={<Song />}/>
