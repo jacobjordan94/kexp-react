@@ -4,7 +4,7 @@ import { Show } from "../components/CurrentShow.components";
 import { ArtistImage, Image } from "../components/AlbumArt";
 import { Controls } from "../components/Controls";
 import { Outlet } from "react-router";
-import { FullArtistInfo } from "../components/ArtistInformation.components";
+import { ArtistInformation, FullArtistInfo } from "../components/ArtistInformation.components";
 
 export default function NowPlayingLayout({ children, startClassName, endClassName }) {
     const { globalState: { currentShow, currentSong } } = useContext(GlobalContext);
@@ -45,7 +45,9 @@ function ControlsBox ({ song, className }) {
             <Image image={song.image_uri} className="rounded-2xl overflow-hidden h-full">
                 <div className="info dark-alpha-2 p-4 flex flex-col h-full justify-end backdrop-blur-xs overflow-hidden">
                     <ArtistImage artistName={song.artist} className="flex-grow rounded-2xl bg-top overflow-hidden">
-                        <div className="artist text-2xl font-semibold h-full w-full flex items-end p-4 bg-linear-to-b from-[rgba(0,0,0,0)] to-[rgba(0,0,0,1)]">{ song.artist }</div>
+                        <div className="artist text-2xl font-semibold h-full w-full flex items-end p-4 bg-linear-to-b from-[rgba(0,0,0,0)] to-[rgba(0,0,0,1)]">
+                            <ArtistInformation artistName={song.artist} iconClass="" textClass="text-2xl" />
+                        </div>
                     </ArtistImage>
                     <div className="other-info px-4 py-2">
                         <FullArtistInfo song={song} sections={['album', 'song']}
