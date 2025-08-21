@@ -22,7 +22,7 @@ export function SongCard({ song }) {
                      rounded-lg transparent-border-dark 
                       cursor-pointer flex gap-3 
                      sm:flex-col sm:h-full sm:p-0 overflow-hidden 
-                     sm:gap-0 sm:shadow-xl"
+                     sm:gap-0 shadow-xl"
             onClick={() => navigate('/song/' + song.id)}
         >
             <Image image={song.image_uri} className="min-w-16 rounded-md sm:rounded-none overflow-hidden sm:w-full sm:flex-grow sm:min-h-48">
