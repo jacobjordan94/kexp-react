@@ -1,0 +1,10 @@
+services:
+  kexp-react:
+    image: kexp-react:v-alpha
+    build:
+      context: .
+      dockerfile: ./Dockerfile.prod
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8320:3000
