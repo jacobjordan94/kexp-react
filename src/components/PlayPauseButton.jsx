@@ -1,16 +1,18 @@
-import { useState } from "react"
+import { useContext } from "react"
 import { PlayIcon, PauseIcon } from "@heroicons/react/24/solid";
+import { GlobalContext } from '../main';
 
 function PlayPauseButton({ className = '' }) {
+    const { globalState } = useContext(GlobalContext);
+    const { audio: { isPlaying, togglePlay } } = globalState;
 
-    const [ isPlaying, setIsPlaying ] = useState(false);
-    function togglePlayPause() {
-        setIsPlaying(!isPlaying);
-    }
-
-    return <button className={'reset-padding play-pause-button ' + className} onClick={togglePlayPause}>
-        { isPlaying ? <PauseIcon /> : <PlayIcon /> }
-    </button>
+    return (
+        <button className={'reset-padding play-pause-button ' + className} 
+                onClick={togglePlay}
+        >
+            { isPlaying ? <PauseIcon /> : <PlayIcon /> }
+        </button>
+    ); 
 }
 
 export default PlayPauseButton;
