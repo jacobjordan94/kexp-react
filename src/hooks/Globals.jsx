@@ -3,6 +3,7 @@ import useCurrentShow from "./CurrentShow";
 import useCurrentSong from "./CurrentSong";
 import useRecents from "./Recents";
 import useLikedSongs from "./LikedSongs";
+import useAudioPlayer from "./AudioPlayer";
 
 function useGlobals() {
     const [ globalState, _setGlobalState ] = useState({
@@ -14,6 +15,7 @@ function useGlobals() {
     const [ recents, setRecents ] = useRecents();
     const [ likedSongs, likedSongsDispatch ] = useLikedSongs();
     const [ currentBackground, setCurrentBackground ] = useState();
+    const audio = useAudioPlayer('https://kexp-mp3-128.streamguys1.com/kexp128.mp3');
 
     function setGlobalState(partialState) {
         _setGlobalState(oldState => ({ ...oldState, ...partialState }));
@@ -50,7 +52,7 @@ function useGlobals() {
         }
     }, [ currentBackground ]);
 
-    return [ globalState, setGlobalState ];
+    return [ { audio, ...globalState}, setGlobalState ];
 }
 
 export default useGlobals;
