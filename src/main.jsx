@@ -10,14 +10,14 @@ import Song from './pages/Song'
 import SongListLayout from './layouts/SongListLayout'
 import { SongList } from './components/SongList'
 import NowPlayingLayout from './layouts/NowPlayingLayout'
-import HelmetExport, { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet'
 
 export const GlobalContext = createContext();
 
+const PRODUCTION = import.meta.env.PROD;
+const Root = () => PRODUCTION ? <App /> : <StrictMode><App /></StrictMode>;
 createRoot(document.getElementById('root')).render(
-  // <StrictMode>
-    <App />
-  // </StrictMode>,
+  <Root />
 )
 
 function App() {
