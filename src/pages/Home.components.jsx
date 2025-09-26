@@ -1,11 +1,9 @@
 import { MusicalNoteIcon, UserIcon } from "@heroicons/react/24/solid";
-import { ArtistImage, Image } from "../components/AlbumArt";
-import CurrentShowMini from "../components/CurrentShow.components";
-import BaseLikeButton from "../components/BaseLikeButton";
+import { ArtistImage, Image } from "@/components/AlbumArt";
+import CurrentShowMini from "@/components/CurrentShow.components";
 import CommentBox from "../components/CommentBox";
-import { Controls } from "../components/Controls";
-import PlayPauseButton from "../components/PlayPauseButton";
-import { FullArtistInfoWithLikeButton } from "../components/ArtistInformation.components";
+import Controls from "@/components/Controls";
+import { FullArtistInfoWithLikeButton } from "@/components/ArtistInformation.components";
 
 export function HomeInformation({ currentSong }) {
     return ( currentSong &&
@@ -13,7 +11,7 @@ export function HomeInformation({ currentSong }) {
             <div className="w-full flex flex-col flex-grow lg:flex-row lg:flex-grow">
                 <Image image={currentSong.image_uri} className="album-art-wrapper rounded-2xl border-4 transparent-border-light overflow-hidden flex-grow h-full lg:flex lg:items-center lg:justify-center">
                     <div className="hidden lg:inline">
-                        <PlayPauseButton className="size-16" />
+                        <Controls.PlayPauseButton className="size-16" />
                     </div>
                 </Image>
                 <div className="flex flex-col flex-grow justify-between sm:flex-row sm:grow-0 pt-4 lg:pt-0 lg:grow-0 lg:px-8 lg:flex-col lg:justify-end lg:min-w-lg lg:gap-6">
@@ -28,7 +26,7 @@ export function HomeInformation({ currentSong }) {
                     <div className="hidden lg:block">
                         <CurrentShowMini size="size-16" titleClass="text-lg max-w-2xs overflow-hidden overflow-ellipsis whitespace-nowrap" subtitleClass="text-md max-w-2xs overflow-hidden overflow-ellipsis whitespace-nowrap" />
                     </div>
-                    <Controls offset={false} className="hidden gap-6 sm:flex items-center lg:hidden" currentSong={currentSong}></Controls>
+                    <Controls.Container borders="true" className="hidden gap-6 sm:flex w-1/3 items-center lg:hidden"/>
                 </div>
             </div>
         </div>

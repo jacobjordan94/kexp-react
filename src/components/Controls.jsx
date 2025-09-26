@@ -1,50 +1,58 @@
-import { HeartIcon, InformationCircleIcon } from "@heroicons/react/24/solid";
+import { HeartIcon, InformationCircleIcon, PlayIcon, PauseIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as HeartOutlineIcon } from "@heroicons/react/24/outline";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../main";
 import { useNavigate } from "react-router";
-import PlayPauseButton from "./PlayPauseButton";
+import { cn } from "../lib/utils";
+import { Button } from "@/components/ui/button";
 
-const HomeButton = ({ className, onClick, children, disabled = false, shadow = false }) => 
-    <div className="home-button-wrap">
-        <div className={"rounded-full overflow-hidden backdrop-blur-2xl inline-flex transparent-border-dark border-2 " + (shadow ? 'default-shadow shadow-xl border-none' : '')}>
-            <button disabled={disabled} className={'home-button reset-padding disabled:opacity-75 disabled:blur-2 ' + className} 
-                    onClick={onClick}
-            >
-                <div className="p-2">
-                    { children }
-                </div>
-            </button>
-        </div>
-    </div>
+const MediaButton = props => 
+    <Button variant="glass" size="icon" {...props} 
+        className={cn(
+            "text-white text-lg", 
+            "*:min-w-full *:min-h-full *:p-[20%]",
+            "group-data-[shadows=true]/mediaControls:shadow-sm",
+            "group-data-[shadows=true]/mediaControls:shadow-black/30",
+            "group-data-[borders=true]/mediaControls:border-2",
+            "group-data-[borders=true]/mediaControls:border-white/10",
+            props.className, 
+            )} >
+        { props.children }
+    </Button>
 
-function InformationButton({ currentSong, shadow = false })  {
+
+function InformationButton(props)  {
+    const { globalState: { currentSong } } = useContext(GlobalContext);
     const navigate = useNavigate();
-
     return ( currentSong &&
-        <HomeButton 
+        <MediaButton 
             disabled={ currentSong.play_type !== 'trackplay' }
-            className={'information size-12'} 
+            className={cn("information-button", props.className)} 
             onClick={() => navigate('/song/' + currentSong.id)}
-            shadow={shadow}
+            { ...props }
         >
-            <InformationCircleIcon /> :
-        </HomeButton>
+            <InformationCircleIcon />
+        </MediaButton>
     );
 }
 
-function HomePlayPauseButton({ shadow = false }) {
+function PlayPauseButton(props) {
+    const { globalState } = useContext(GlobalContext);
+    const { audio: { isPlaying, togglePlay } } = globalState;
     return (
-            <PlayPauseButton className={`size-16 rounded-full! p-2! backdrop-blur-2xl transparent-border-dark border-2 ${shadow ? 'default-shadow shadow-xl border-none' : ''}`} />
-        );
+        <MediaButton data-icon-size={props['icon-size'] ?? 'default'} onClick={togglePlay} {...props} className={cn("play-pause data-[icon-size=large]:size-16", props.className)}>
+            { isPlaying ? <PauseIcon /> : <PlayIcon /> }
+        </MediaButton>
+    )
 }
 
-function LikeButton({ currentSong, shadow = false }) {
-    const { globalState: { likedSongs: { songs, dispatch } } } = useContext(GlobalContext);
+function LikeButton(props) {
+    const { globalState: { likedSongs: { songs, dispatch }, currentSong } } = useContext(GlobalContext);
     const [ liked, setLiked ] = useState(false); 
     const alreadyLiked = () => songs.findIndex(song => song.id === currentSong.id) > -1;
     
     function toggleLike() {
+        if(!currentSong) return;
         if(alreadyLiked()) {
             dispatch({ type: 'remove', id: currentSong.id })
         } else {
@@ -60,28 +68,39 @@ function LikeButton({ currentSong, shadow = false }) {
     }, [ songs, currentSong ]);
 
     return ( currentSong && songs &&
-        <HomeButton 
-            className={'like size-12'} 
+        <MediaButton
+            className={cn('like', props.className)} 
             onClick={toggleLike}
             disabled={ currentSong.play_type !== 'trackplay' }
-            shadow={shadow}
+            { ...props }
         >
         {
             liked ?
             <HeartIcon /> : <HeartOutlineIcon />
         }
-        </HomeButton>
+        </MediaButton>
     );
 }
 
-export function Controls({ currentSong, className = '', offset = true, shadow = false }) {
+function Container(props) {
     return (
-        <div className={"controls-wrapper " + className}>
-            <InformationButton shadow={shadow} currentSong={currentSong} />
-            <div className={offset ? 'mt-4' : ''}>
-                <HomePlayPauseButton shadow={shadow} />
-            </div>
-            <LikeButton shadow={shadow} currentSong={currentSong} />
+        <div {...props} 
+            data-offset={props.offset} data-shadows={props.shadows} data-borders={props.borders}
+            className={cn("controls-container-wrapper  flex w-full justify-evenly group/mediaControls", props.className)}
+        >
+        { props.children ??
+            <>
+                <InformationButton />
+                <div className="group-data-[offset=true]/mediaControls:mt-4">
+                    <PlayPauseButton icon-size="large" />
+                </div>
+                <LikeButton />
+            </>
+        }
         </div>
     );
 }
+
+export default {
+    Container, LikeButton, InformationButton, PlayPauseButton, MediaButton
+};

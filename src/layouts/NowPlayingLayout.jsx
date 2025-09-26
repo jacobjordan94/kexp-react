@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { GlobalContext } from "../main";
-import { Show } from "../components/CurrentShow.components";
-import { ArtistImage, Image } from "../components/AlbumArt";
-import { Controls } from "../components/Controls";
+import { Show } from "@/components/CurrentShow.components";
+import { ArtistImage, Image } from "@/components/AlbumArt";
 import { Outlet } from "react-router";
-import { ArtistInformation, FullArtistInfo } from "../components/ArtistInformation.components";
+import { ArtistInformation, FullArtistInfo } from "@/components/ArtistInformation.components";
+import Controls from "@/components/Controls";
 
 export default function NowPlayingLayout({ children, startClassName, endClassName }) {
     const { globalState: { currentShow, currentSong } } = useContext(GlobalContext);
@@ -54,7 +54,7 @@ function ControlsBox ({ song, className }) {
                         />
                     </div>
                     <div className="buttons-container mt-4">
-                        <Controls currentSong={song} className="flex flex-row justify-evenly" />
+                        <Controls.Container />
                     </div>
                 </div>
             </Image>

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { GlobalContext } from "../main";
+import { GlobalContext } from "@/main";
 import { HeartIcon, HomeIcon, QueueListIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as HeartOutlineIcon, HomeIcon as HomeOutlineIcon, QueueListIcon as QueueListOutlineIcon } from "@heroicons/react/24/outline";
-import PictureWithInfo from "./PictureWithInfo";
-import PlayPauseButton from "./PlayPauseButton";
-import CurrentShowMini from "./CurrentShow.components";
+import PictureWithInfo from "@/components/PictureWithInfo";
+import CurrentShowMini from "@/components/CurrentShow.components";
+import Controls from "@/components/Controls";
 
 export default function Footer({}) {
 
@@ -84,7 +84,7 @@ function NowPlaying({ currentSong }) {
             subtitle={currentSong.song || 'Airbreak'}
         >
             <div className="play-pause-wrap size-12 inline-flex items-center justify-center">
-                <PlayPauseButton className="size-8" />
+                <Controls.PlayPauseButton className="size-full *:scale-150" />
             </div>
         </PictureWithInfo>
     )
