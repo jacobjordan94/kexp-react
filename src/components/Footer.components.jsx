@@ -1,15 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { GlobalContext } from "../main";
 import { HeartIcon, HomeIcon, QueueListIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as HeartOutlineIcon, HomeIcon as HomeOutlineIcon, QueueListIcon as QueueListOutlineIcon } from "@heroicons/react/24/outline";
-import PictureWithInfo from "./PictureWithInfo";
-import PlayPauseButton from "./PlayPauseButton";
-import CurrentShowMini from "./CurrentShow.components";
+import PictureWithInfo from "@/components/PictureWithInfo";
+import CurrentShowMini from "@/components/CurrentShow.components";
+import useCurrentSongStore from "@/store/useCurrentSongStore";
+import useCurrentShowStore from "@/store/useCurrentShowStore";
+import PlayPauseButtonPrimitive from "@/components/primitives/play-pause";
 
 export default function Footer({}) {
 
-    const { globalState: { currentSong, currentShow } } = useContext(GlobalContext);
+    const currentSong = useCurrentSongStore(store => store.currentSong);
+    const currentShow = useCurrentShowStore(store => store.currentShow);
     const [ currentPath, setCurrentPath ] = useState();
     const loc = useLocation();
   
@@ -83,9 +85,7 @@ function NowPlaying({ currentSong }) {
             title={currentSong.artist || 'KEXP'}
             subtitle={currentSong.song || 'Airbreak'}
         >
-            <div className="play-pause-wrap size-12 inline-flex items-center justify-center">
-                <PlayPauseButton className="size-8" />
-            </div>
+            <PlayPauseButtonPrimitive className="p-2" />
         </PictureWithInfo>
     )
 }
