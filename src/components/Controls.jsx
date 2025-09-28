@@ -1,10 +1,13 @@
 import { HeartIcon, InformationCircleIcon, PlayIcon, PauseIcon } from "@heroicons/react/24/solid";
 import { HeartIcon as HeartOutlineIcon } from "@heroicons/react/24/outline";
-import React, { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../main";
+import React from "react";
 import { useNavigate } from "react-router";
 import { cn } from "../lib/utils";
 import { Button } from "@/components/ui/button";
+import useCurrentSongStore from "@/store/useCurrentSongStore";
+import useIsLiked from "@/hooks/IsLiked";
+import LikeSongButton from "@/components/primitives/like-song";
+import PlayPauseButtonPrimitive from "@/components/primitives/play-pause";
 
 const MediaButton = props => 
     <Button variant="glass" size="icon" {...props} 
@@ -22,7 +25,7 @@ const MediaButton = props =>
 
 
 function InformationButton(props)  {
-    const { globalState: { currentSong } } = useContext(GlobalContext);
+    const currentSong = useCurrentSongStore(store => store.currentSong);
     const navigate = useNavigate();
     return ( currentSong &&
         <MediaButton 
@@ -37,48 +40,37 @@ function InformationButton(props)  {
 }
 
 function PlayPauseButton(props) {
-    const { globalState } = useContext(GlobalContext);
-    const { audio: { isPlaying, togglePlay } } = globalState;
     return (
-        <MediaButton data-icon-size={props['icon-size'] ?? 'default'} onClick={togglePlay} {...props} className={cn("play-pause data-[icon-size=large]:size-16", props.className)}>
-            { isPlaying ? <PauseIcon /> : <PlayIcon /> }
-        </MediaButton>
+        <PlayPauseButtonPrimitive asChild
+            data-icon-size={props['icon-size'] ?? 'default'} 
+            {...props} 
+            className={cn("play-pause", props.className)
+        }>
+            <MediaButton className="*:hidden">
+                <PlayIcon  className="group-data-[is-playing=false]/playPauseButton:flex" />
+                <PauseIcon className="group-data-[is-playing=true]/playPauseButton:flex"  />
+            </MediaButton>
+        </PlayPauseButtonPrimitive>
     )
 }
 
 function LikeButton(props) {
-    const { globalState: { likedSongs: { songs, dispatch }, currentSong } } = useContext(GlobalContext);
-    const [ liked, setLiked ] = useState(false); 
-    const alreadyLiked = () => songs.findIndex(song => song.id === currentSong.id) > -1;
-    
-    function toggleLike() {
-        if(!currentSong) return;
-        if(alreadyLiked()) {
-            dispatch({ type: 'remove', id: currentSong.id })
-        } else {
-            dispatch({ type: 'add', song: {...currentSong} });
-        }
-    }
+    const currentSong = useCurrentSongStore(store => store.currentSong);
+    const liked = useIsLiked(currentSong);
 
-    useEffect(() => {
-        if(!songs && !currentSong) return;
-        if(alreadyLiked()) {
-            setLiked(true);
-        } else { setLiked(false); }
-    }, [ songs, currentSong ]);
-
-    return ( currentSong && songs &&
-        <MediaButton
+    return ( currentSong &&
+        <LikeSongButton asChild song={currentSong} 
             className={cn('like', props.className)} 
-            onClick={toggleLike}
             disabled={ currentSong.play_type !== 'trackplay' }
             { ...props }
         >
-        {
-            liked ?
-            <HeartIcon /> : <HeartOutlineIcon />
-        }
-        </MediaButton>
+            <MediaButton>
+            {
+                liked ?
+                <HeartIcon /> : <HeartOutlineIcon />
+            }   
+            </MediaButton>
+        </LikeSongButton>
     );
 }
 

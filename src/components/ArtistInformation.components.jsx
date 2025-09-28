@@ -1,7 +1,8 @@
 import { UserIcon, MusicalNoteIcon  } from "@heroicons/react/24/solid"
 import { useEffect, useState } from "react";
-import BaseLikeButton from "./BaseLikeButton";
 import AlbumIconComponent from '../components/AlbumIcon';
+import LikeSongButton from "./primitives/like-song";
+import { cn } from "@/lib/utils";
 
 export const AlbumIcon = ({ className }) => <AlbumIconComponent className={className} />
 export const ArtistIcon = ({ className }) => <UserIcon className={className} />
@@ -59,17 +60,10 @@ export function FullArtistInfo({ song, sections = ['artist', 'song', 'album'], a
     );
 }
 
-export function FullArtistInfoWithLikeButton({ song, sections = ['artist', 'song', 'album'], artistIconClass, artistTextClass, songIconClass, songTextClass, albumIconClass, albumTextClass, iconClass, textClass, className, likeButtonSize = 'size-10', likeButtonClassName }) {
-    return ( 
-        <FullArtistInfo
-            song={song} sections={sections} artistIconClass={artistIconClass} 
-            artistTextClass={artistTextClass} songIconClass={songIconClass} 
-            songTextClass={songTextClass} albumIconClass={albumIconClass} 
-            albumTextClass={albumTextClass} iconClass={iconClass} textClass={textClass}
-            className={className}
-        >
-            <BaseLikeButton className={"me-4 " + likeButtonSize + " " + likeButtonClassName} currentSong={song} />
+export function FullArtistInfoWithLikeButton({ song, sections = ['artist', 'song', 'album'], likeButtonSize = 'size-10', ...props }) {
+    return (
+        <FullArtistInfo song={song} sections={sections} {...props}>
+            <LikeSongButton className={cn("me-4", props.likeButtonSize, props.likeButtonClassName)} song={song}/>
         </FullArtistInfo>
     );
 }
-

@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Image } from "./AlbumArt";
 import PictureWithInfo from "./PictureWithInfo";
-import { GlobalContext } from "../main";
 import { useShow } from "../hooks/Show";
 import { RadioIcon } from "@heroicons/react/24/solid";
 import { HostImage, HostsContainer } from "./Host.components";
 import { ProgramTags } from "./ProgramTags";
+import useCurrentShowStore from "@/store/useCurrentShowStore";
 
 export function Show({ show, id = null, className = '' }) {
     
@@ -50,7 +50,7 @@ export function Show({ show, id = null, className = '' }) {
 }
 
 export function CurrentShow() {
-    const { globalState: { currentShow } } = useContext(GlobalContext);
+    const currentShow = useCurrentShowStore(store => store.currentShow);
     return currentShow && <Show show={currentShow} />
 }
 
@@ -71,7 +71,7 @@ export function ShowMini({ show, size = 'size-12', titleClass = '', subtitleClas
 }
 
 function CurrentShowMini({ size = 'size-12', titleClass = '', subtitleClass = 'text-xs' }) {
-    const { globalState: { currentShow } } = useContext(GlobalContext);
+    const currentShow = useCurrentShowStore(store => store.currentShow);
     return currentShow && <ShowMini show={currentShow} size={size} titleClass={titleClass} subtitleClass={subtitleClass} />
 }
 

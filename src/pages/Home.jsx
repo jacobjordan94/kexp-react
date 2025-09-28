@@ -1,13 +1,10 @@
-import { useContext } from "react";
-import { GlobalContext } from "../main";
 import { HomeInformation } from "./Home.components";
 import Controls from "@/components/Controls";
+import useCurrentSongStore from "@/store/useCurrentSongStore";
 import { Helmet } from "react-helmet";
 
 function Home() {
-
-    const { globalState: { currentSong } } = useContext(GlobalContext);
-
+    const currentSong = useCurrentSongStore(store => store.currentSong);
     return (
         <>
             <Helmet>

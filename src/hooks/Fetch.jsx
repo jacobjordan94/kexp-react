@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import fetch from '@/lib/localFetch';
 
 function useFetch(url, params, options = { autoRefresh: false, interval: 0, makeRequestOnStart: true }) {
     const [ response, setResponse ] = useState();
 
     async function refresh(updatedUrl = null, updatedParams = {}) {
-        const _response = await localFetch(updatedUrl || url, { ...params, ...updatedParams });
+        const _response = await fetch(updatedUrl || url, { ...params, ...updatedParams });
         setResponse(_response);
     }
 
@@ -16,16 +17,6 @@ function useFetch(url, params, options = { autoRefresh: false, interval: 0, make
     }, []);
 
     return [ response, refresh ];
-}
-
-async function localFetch(url, params) {
-    const _url = new URL(url);
-    _url.search = new URLSearchParams(params).toString();
-
-    const response = await fetch(_url);
-    const json = await response.json();
-
-    return json;
 }
 
 export default useFetch;

@@ -1,13 +1,14 @@
-import { useContext } from "react";
-import { GlobalContext } from "../main";
 import { Show } from "@/components/CurrentShow.components";
 import { ArtistImage, Image } from "@/components/AlbumArt";
 import { Outlet } from "react-router";
 import { ArtistInformation, FullArtistInfo } from "@/components/ArtistInformation.components";
 import Controls from "@/components/Controls";
+import useCurrentSongStore from "@/store/useCurrentSongStore";
+import useCurrentShowStore from "@/store/useCurrentShowStore";
 
 export default function NowPlayingLayout({ children, startClassName, endClassName }) {
-    const { globalState: { currentShow, currentSong } } = useContext(GlobalContext);
+    const currentSong = useCurrentSongStore(store => store.currentSong);
+    const currentShow = useCurrentShowStore(store => store.currentShow);
     return (
         <div className="now-playing-layout flex h-full gap-4">
             <div className={"start-col overflow-y-scroll " + startClassName}>
